@@ -3,29 +3,80 @@ body {
     color: #fff;
     margin: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow: hidden; /* Hide scrollbars */
+    overflow-y: scroll; /* Allow vertical scrolling for changelog */
 }
 
-.center {
+/* Navigation Bar */
+nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
 }
 
-h1 {
-    font-size: 5rem;
-    font-weight: 300;
-    letter-spacing: -2px;
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+}
+
+/* Main Content Area for Changelog */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+/* Changelog Specific Styles */
+#changelog-content h1, #changelog-content h2, #changelog-content h3 {
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+#changelog-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+#changelog-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Player Count Corner Box */
+#player-count-corner {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+}
+
+/* Cursor Light Effect (Unchanged) */
 .cursor-light {
     position: fixed;
     width: 400px;
     height: 400px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
-    pointer-events: none; /* Make sure it doesn't interfere with mouse clicks */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+    pointer-events: none;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease-out;
+    z-index: -1;
 }
