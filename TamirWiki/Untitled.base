@@ -1,0 +1,16 @@
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - file.tags
+    sort:
+      - property: file.tags
+        direction: DESC
+      - property: file.name
+        direction: ASC
+  - type: cards
+    name: View
+    filters:
+      and:
+        - file.hasLink("skill")
