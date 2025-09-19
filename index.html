@@ -3,31 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamir - Changelog</title>
+    <title>Tamir Archives – Obsidian Vault</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-pdkwtn6lCPnkLIvH5A6O6pI4PjijNsEOlInt1emwc4in+qyTWNrawgKAYEoibMQyFIc8v6IPF1ilREuH/ZShwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+        <div class="site-header__crest" aria-hidden="true">
+            <span class="crest-sigil">⚜️</span>
+        </div>
+        <div class="site-header__title">
+            <h1>Tamir Archives</h1>
+            <p>Curating every chronicle, decree, and sketch from the Obsidian Vault.</p>
+        </div>
+        <div class="site-header__aside">
+            <form class="site-header__search" role="search">
+                <label for="site-search" class="visually-hidden">Search the archives</label>
+                <input id="site-search" type="search" name="search" placeholder="Search the archives" autocomplete="off">
+                <button type="submit">Go</button>
+            </form>
+            <p class="site-header__update">Last catalogue refresh: <span id="vault-refresh">Awaiting manifest</span></p>
+        </div>
+    </header>
 
-<nav>
-    <div class="nav-brand">Tamir</div>
-    <div class="nav-links">
-        <a href="#" class="active">Home Page</a>
-        <a href="#">Media</a>
-        <a href="#">Store</a>
-        <a href="#">Tamir Wiki</a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#" class="nav-link active">Vault</a>
+        <a href="#" class="nav-link">Projects</a>
+        <a href="#" class="nav-link">Guides</a>
+        <a href="#" class="nav-link">Community</a>
+        <a href="#" class="nav-link">World Map</a>
+        <a href="#" class="nav-link">Council Tools</a>
+    </nav>
+
+    <div class="content-layout">
+        <aside class="column column--left" aria-label="Scholarly directives">
+            <section class="portal-card">
+                <h3>Scholia Imperialis</h3>
+                <ul>
+                    <li><a href="#">Grand design briefs</a></li>
+                    <li><a href="#">Expedition dossiers</a></li>
+                    <li><a href="#">Arcane research log</a></li>
+                    <li><a href="#">Guildmaster petitions</a></li>
+                    <li><a href="#">Cartographer's drafts</a></li>
+                </ul>
+            </section>
+            <section class="portal-card">
+                <h3>Correspondence</h3>
+                <ul>
+                    <li><a href="#">Council bulletins</a></li>
+                    <li><a href="#">Mercantile letters</a></li>
+                    <li><a href="#">Diplomatic archives</a></li>
+                    <li><a href="#">Festival invitations</a></li>
+                    <li><a href="#">Scribes' ledger</a></li>
+                </ul>
+            </section>
+            <section class="portal-card">
+                <h3>Guild utilities</h3>
+                <ul>
+                    <li><a href="#">Skill harmonics</a></li>
+                    <li><a href="#">Artefact registry</a></li>
+                    <li><a href="#">Bestiary annotations</a></li>
+                    <li><a href="#">Logistics table</a></li>
+                </ul>
+            </section>
+        </aside>
+
+        <main id="main-content" class="column column--main" aria-labelledby="vault-heading">
+            <section class="vault" aria-label="Obsidian vault library">
+                <header class="vault__header">
+                    <div>
+                        <h2 id="vault-heading">Obsidian Vault Library</h2>
+                        <p>Browse field notes, design briefs, and council orders preserved within the vault.</p>
+                    </div>
+                    <div class="vault__controls">
+                        <label class="visually-hidden" for="vault-search">Search the vault</label>
+                        <input id="vault-search" type="search" placeholder="Search manuscripts" autocomplete="off">
+                        <span class="vault__status" id="vault-status">Indexing the shelves…</span>
+                    </div>
+                </header>
+                <div class="vault__body">
+                    <nav class="vault__catalog" aria-label="Vault catalogue">
+                        <div class="vault__catalog-scroll" id="vault-catalog" aria-live="polite"></div>
+                    </nav>
+                    <article class="vault__note" id="vault-note" aria-live="polite">
+                        <p class="vault__placeholder">Select a manuscript from the catalogue to unveil its transcription.</p>
+                    </article>
+                </div>
+                <footer class="vault__breadcrumbs" id="vault-breadcrumbs" aria-live="polite"></footer>
+            </section>
+
+            <article class="article chronicle">
+                <header class="article__header">
+                    <h2 id="article-heading">Development Chronicle</h2>
+                    <p class="article__meta">Latest entry: <span id="changelog-updated">Gathering records...</span></p>
+                </header>
+                <div id="changelog-content" class="article__body">
+                    <p>Gathering entries from the Grand Library...</p>
+                </div>
+            </article>
+
+            <section class="feature-grid" aria-label="Featured resources">
+                <h3>Curated briefings</h3>
+                <div class="feature-grid__cards">
+                    <article class="feature-card">
+                        <h4>Master artisanship</h4>
+                        <p>Treatises on crafting, resource routes, and refined production ledgers.</p>
+                        <a href="#" class="feature-card__link">Review the workshop schematics</a>
+                    </article>
+                    <article class="feature-card">
+                        <h4>Strategic campaigns</h4>
+                        <p>Battlefield diagrams, gauntlet stratagems, and hero rosters.</p>
+                        <a href="#" class="feature-card__link">Consult the war council records</a>
+                    </article>
+                    <article class="feature-card">
+                        <h4>Economic intelligence</h4>
+                        <p>Trade winds, market valuations, and caravansary inventories.</p>
+                        <a href="#" class="feature-card__link">Inspect the trade manifest</a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <aside class="column column--right" aria-label="World details">
+            <section class="infobox">
+                <div class="infobox__title">Realm status</div>
+                <div class="infobox__content">
+                    <div class="player-status">
+                        <span id="player-status-indicator" class="status-indicator status-unknown" aria-hidden="true"></span>
+                        <span id="player-status-text">Checking realm...</span>
+                    </div>
+                    <p class="player-count">Players in session: <span id="player-count">--</span></p>
+                    <p class="player-updated">Last checked: <span id="player-updated">Awaiting update</span></p>
+                </div>
+            </section>
+
+            <section class="infobox">
+                <div class="infobox__title">Active commissions</div>
+                <div class="infobox__content">
+                    <ul class="infobox__list">
+                        <li><strong>Woodcutting Requital:</strong> Finalize grove tiers and draughts.</li>
+                        <li><strong>Gauntlet Theses:</strong> Refine Hunllef rituals and diagrams.</li>
+                        <li><strong>Guild Ledger:</strong> Expand leadership tracking utilities.</li>
+                        <li><strong>Continental Charts:</strong> Mark key events and convergences.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="infobox">
+                <div class="infobox__title">From the scriptorium</div>
+                <div class="infobox__content">
+                    <p>The Spirit of the Grove now guarantees tribute when summoned—optimal for rare stockpiles.</p>
+                </div>
+            </section>
+        </aside>
     </div>
-</nav>
 
-<main id="changelog-content">
-    <h2>Loading Changelog...</h2>
-</main>
+    <footer class="site-footer">
+        <p>Maintained by the Tamir Council of Scribes. Honouring the craft of the Obsidian Vault.</p>
+    </footer>
 
-<div id="player-count-corner">
-    Players Online: <span id="player-count">...</span>
-</div>
-
-<div class="cursor-light"></div>
-<script src="script.js"></script>
+    <div class="cursor-light" aria-hidden="true"></div>
+    <script src="script.js"></script>
 </body>
 </html>
