@@ -4,77 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a0b904f-27a1-4994-b545-05db6f99366c" name="Changes" comment="-added obsidian vault">
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/00 - Home &amp; Dashboard/Home.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/(0.0.4) - 2025-09-16 - Woodcutting Rework pt2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/Changelog.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/Development Journal.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/Project Roadmap.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/Version 1.0.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/previous versions/(0.0.1) - 2025-07-23.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/previous versions/(0.0.2) - 2025-07-30.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/01 - Project Management/previous versions/(0.0.3) - 2025-09-11 - Woodcutting Rework pt 1.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/02 - Game Design/Game Design Document (GDD).md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/02 - Game Design/Map Design Document.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/02 - Game Design/Skilling Philosophy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/B - Achievement Rework.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Interfaces/World Tab ('quest tab').md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Monsters &amp; Bosses/Galvek.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/NPCs/Aggie.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/NPCs/Wilfred.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Agility.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Construction.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Cooking.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Crafting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Farming.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Firemaking.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Fishing.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Fletching.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Herblore.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Hunter.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Magic.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Mining.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Prayer.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Runecrafting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Skills Blogs/B - Agility.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Skills Blogs/B - Enchanting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Skills Blogs/B - Fletching.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Skills Blogs/B - Smithing.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Skills Blogs/B - Woodcutting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Slayer.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Smithing.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Thieving.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/04 - Content Implementation/Skills/Woodcutting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Cache File System.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Client Synchronization.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Entity System.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Game Engine &amp; Main Loop.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Item System.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/NPCs.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Networking/Login Protocol.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Networking/Networking Overview.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Networking/Packet System.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Player Character.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/Region and Pathfinding.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/05 - Technical Notes/World Class.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - Item.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - Location.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - Monster.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - NPC.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - Quest.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/T - Skill.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/06 - Templates/Tamir Central.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/07 - Attachments/media/(Home - 0.0.5).md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/Pasted image 20250918151953.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/Untitled.base" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TamirWiki/Woodcutting Rework Part 1.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/player_count.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/playercount.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" />
-    </list>
+    <list default="true" id="7a0b904f-27a1-4994-b545-05db6f99366c" name="Changes" comment="-added obsidian vault" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Tamir" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -113,7 +43,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Tamir",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/lukenapier.github.io",
     "nodejs_package_manager_path": "npm",
@@ -157,52 +87,6 @@
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="lukenapier.github.io" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="lukenapier.github.io" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="lukenapier.github.io" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
   </component>
