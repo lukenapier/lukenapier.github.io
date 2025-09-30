@@ -1,0 +1,71 @@
+---
+const { class: className = '' } = Astro.props;
+---
+<button
+  type="button"
+  data-theme-toggle
+  class={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300/60 bg-white/50 text-neutral-600 shadow-sm transition hover:border-aurora-400 hover:text-aurora-500 dark:border-neutral-700 dark:bg-neutral-900/70 dark:text-neutral-300 ${className}`}
+  aria-label="Toggle color scheme"
+>
+  <svg class="sun h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m16.95 7.95-1.41-1.41M6.46 6.46 5.05 5.05m13.9 0-1.41 1.41M6.46 17.54l-1.41 1.41" />
+  </svg>
+  <svg class="moon hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+</button>
+<script is:inline>
+  const button = document.querySelector('[data-theme-toggle]');
+  const STORAGE_KEY = 'lucas-theme';
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const root = document.documentElement;
+
+  const applyTheme = (theme) => {
+    const isDark = theme === 'dark';
+    root.classList.toggle('dark', isDark);
+    root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (error) {
+      // ignore storage errors
+    }
+    if (button) {
+      const [sun, moon] = button.querySelectorAll('svg');
+      if (sun && moon) {
+        sun.classList.toggle('hidden', isDark);
+        moon.classList.toggle('hidden', !isDark);
+      }
+    }
+  };
+
+  const initial = (() => {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  })();
+
+  applyTheme(initial ?? (prefersDark.matches ? 'dark' : 'light'));
+
+  prefersDark.addEventListener('change', (event) => {
+    const stored = (() => {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch (error) {
+        return null;
+      }
+    })();
+    if (!stored) {
+      applyTheme(event.matches ? 'dark' : 'light');
+    }
+  });
+
+  if (button) {
+    button.addEventListener('click', () => {
+      const isDark = root.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  }
+</script>

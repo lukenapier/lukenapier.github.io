@@ -1,0 +1,39 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+const { breadcrumbs = [] } = Astro.props;
+---
+<header class="sticky top-0 z-40 border-b border-neutral-200/60 bg-white/80 backdrop-blur-xl transition-colors dark:border-neutral-800 dark:bg-neutral-950/80">
+  <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-6">
+    <div class="flex items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
+      <a href="/garden/" class="text-base font-medium text-neutral-900 transition hover:text-aurora-500 dark:text-neutral-100">
+        Lucas’s Mind Garden
+      </a>
+      {breadcrumbs.length > 0 && (
+        <nav aria-label="Breadcrumb" class="hidden items-center gap-2 text-sm sm:flex">
+          <span aria-hidden="true" class="text-neutral-400">/</span>
+          <ol class="flex items-center gap-2">
+            {breadcrumbs.map((crumb, index) => (
+              <li class="flex items-center gap-2" key={`${crumb.href ?? ''}-${index}`}>
+                {crumb.href ? (
+                  <a class="truncate text-neutral-500 transition hover:text-aurora-500 dark:text-neutral-300" href={crumb.href}>
+                    {crumb.label}
+                  </a>
+                ) : (
+                  <span class="truncate text-neutral-600 dark:text-neutral-200">{crumb.label}</span>
+                )}
+                {index < breadcrumbs.length - 1 && <span aria-hidden="true" class="text-neutral-400">/</span>}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+    </div>
+    <div class="flex flex-1 items-center gap-3 sm:justify-end">
+      <div class="min-w-[200px] flex-1 sm:flex-initial">
+        <slot name="search" />
+      </div>
+      <slot name="actions" />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
