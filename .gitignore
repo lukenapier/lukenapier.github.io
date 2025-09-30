@@ -1,0 +1,14 @@
+node_modules
+.dist
+.DS_Store
+*.log
+npm-debug.log*
+.env*
+.astro
+.svelte-kit
+.vscode
+.idea
+dist
+public/garden-assets
+src/content/notes
+public/garden-search.json
