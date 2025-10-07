@@ -37,24 +37,108 @@
                     <h2>Mining</h2>
                     <p>Delve into the Stonefall Quarry and excavate rich veins of ore.</p>
                 </header>
-                <div class="locations">
-                    <article class="location-card">
-                        <h3>Stonefall Quarry</h3>
-                        <ul>
-                            <li><strong>Level 1:</strong> Shallow Pebble Patches — 10 XP, 3 Stone</li>
-                            <li><strong>Level 10:</strong> Copper Veins — 35 XP, 1 Copper Ore</li>
-                            <li><strong>Level 20:</strong> Iron Strata — 60 XP, 1 Iron Ore</li>
-                            <li><strong>Level 30:</strong> Silver Shard Crest — 120 XP, 1 Silver Ore</li>
-                        </ul>
-                    </article>
-                    <article class="location-card">
-                        <h3>Obsidian Breach</h3>
-                        <ul>
-                            <li><strong>Level 40:</strong> Basalt Clusters — 180 XP, 2 Basalt</li>
-                            <li><strong>Level 50:</strong> Obsidian Spurs — 260 XP, 1 Obsidian</li>
-                            <li><strong>Level 60:</strong> Dragonstone Geodes — 360 XP, 1 Dragonstone Shard</li>
-                        </ul>
-                    </article>
+                <div class="mining-layout">
+                    <div class="mine-map" aria-label="Mining nodes" role="list">
+                        <h3 class="mine-zone-title">Stonefall Quarry</h3>
+                        <div class="mine-node-grid" role="group" aria-label="Stonefall Quarry nodes">
+                            <button class="mine-node active" type="button" role="listitem"
+                                data-node="Shallow Pebble Patches" data-zone="Stonefall Quarry" data-level="1" data-xp="10 XP"
+                                data-resource="3× Stone" data-time="4" data-description="Loose rocks just below the surface. Great for beginners to learn the rhythm of mining without heavy strain.">
+                                <span class="node-label">Shallow Pebble Patches</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 1</span>
+                                    <span class="node-reward">10 XP • 3× Stone</span>
+                                </span>
+                            </button>
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Copper Veins" data-zone="Stonefall Quarry" data-level="10" data-xp="35 XP"
+                                data-resource="1× Copper Ore" data-time="6" data-description="A dependable vein of copper that glows warm in the lantern light. Favoured by smiths looking for fast bars.">
+                                <span class="node-label">Copper Veins</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 10</span>
+                                    <span class="node-reward">35 XP • 1× Copper Ore</span>
+                                </span>
+                            </button>
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Iron Strata" data-zone="Stonefall Quarry" data-level="20" data-xp="60 XP"
+                                data-resource="1× Iron Ore" data-time="7.5" data-description="Dense layers of iron hidden behind tougher stone. Requires patience but rewards a steady stream of ore.">
+                                <span class="node-label">Iron Strata</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 20</span>
+                                    <span class="node-reward">60 XP • 1× Iron Ore</span>
+                                </span>
+                            </button>
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Silver Shard Crest" data-zone="Stonefall Quarry" data-level="30" data-xp="120 XP"
+                                data-resource="1× Silver Ore" data-time="9" data-description="The upper ridge of the quarry sparkles with shards of pure silver. A showpiece node with higher risk, higher reward.">
+                                <span class="node-label">Silver Shard Crest</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 30</span>
+                                    <span class="node-reward">120 XP • 1× Silver Ore</span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <h3 class="mine-zone-title">Obsidian Breach</h3>
+                        <div class="mine-node-grid" role="group" aria-label="Obsidian Breach nodes">
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Basalt Clusters" data-zone="Obsidian Breach" data-level="40" data-xp="180 XP"
+                                data-resource="2× Basalt" data-time="10" data-description="Volcanic stone cooled into smooth hexagons. Breaking them free reveals pockets of crystallised heat.">
+                                <span class="node-label">Basalt Clusters</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 40</span>
+                                    <span class="node-reward">180 XP • 2× Basalt</span>
+                                </span>
+                            </button>
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Obsidian Spurs" data-zone="Obsidian Breach" data-level="50" data-xp="260 XP"
+                                data-resource="1× Obsidian" data-time="12" data-description="Jagged glass-like formations jut from the cavern wall. Handle with care to claim gleaming obsidian shards.">
+                                <span class="node-label">Obsidian Spurs</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 50</span>
+                                    <span class="node-reward">260 XP • 1× Obsidian</span>
+                                </span>
+                            </button>
+                            <button class="mine-node" type="button" role="listitem"
+                                data-node="Dragonstone Geodes" data-zone="Obsidian Breach" data-level="60" data-xp="360 XP"
+                                data-resource="1× Dragonstone Shard" data-time="14" data-description="Massive geodes hum with a faint resonance. Splitting them open may uncover rare dragonstone fragments.">
+                                <span class="node-label">Dragonstone Geodes</span>
+                                <span class="node-meta">
+                                    <span class="node-level">Level 60</span>
+                                    <span class="node-reward">360 XP • 1× Dragonstone Shard</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <aside class="mine-details" aria-live="polite">
+                        <h3>Vein Overview</h3>
+                        <p class="mine-detail-title" data-mining-detail="name">Shallow Pebble Patches</p>
+                        <p class="mine-detail-subtitle" data-mining-detail="zone">Stonefall Quarry • Recommended Level 1</p>
+                        <p class="mine-detail-description" data-mining-detail="description">Loose rocks just below the surface. Great for beginners to learn the rhythm of mining without heavy strain.</p>
+                        <dl class="mine-stats">
+                            <div>
+                                <dt>XP</dt>
+                                <dd data-mining-detail="xp">10 XP</dd>
+                            </div>
+                            <div>
+                                <dt>Resources</dt>
+                                <dd data-mining-detail="resource">3× Stone</dd>
+                            </div>
+                            <div>
+                                <dt>Cycle Time</dt>
+                                <dd data-mining-detail="time">4s</dd>
+                            </div>
+                        </dl>
+                        <button class="mine-start" type="button">Start Mining</button>
+                        <div class="mine-progress" role="progressbar" aria-live="assertive" aria-label="Mining progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <p class="mine-status" data-mining-detail="status">Ready to swing your pickaxe.</p>
+                        <div class="mine-log-wrap">
+                            <h4>Recent Hauls</h4>
+                            <ul class="mine-log" aria-live="polite" aria-label="Mining log"></ul>
+                        </div>
+                    </aside>
                 </div>
             </section>
 
