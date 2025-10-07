@@ -213,6 +213,266 @@ body::before {
     color: var(--accent-emerald);
 }
 
+.mining-layout {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
+    gap: 1.75rem;
+}
+
+.mine-map {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 18px;
+    border: 1px solid rgba(115, 194, 251, 0.3);
+    background: radial-gradient(circle at top left, rgba(74, 92, 130, 0.45), rgba(25, 30, 47, 0.95));
+    box-shadow: inset 0 0 45px rgba(8, 12, 22, 0.65);
+    overflow: hidden;
+}
+
+.mine-map::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/rocky-wall.png');
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.mine-zone-title {
+    margin: 0 0 0.85rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    color: var(--accent-sky);
+    text-shadow: 0 0 12px rgba(115, 194, 251, 0.45);
+    position: relative;
+    z-index: 1;
+}
+
+.mine-node-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mine-node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(115, 194, 251, 0.35);
+    background: linear-gradient(145deg, rgba(36, 43, 63, 0.95), rgba(17, 20, 30, 0.9));
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mine-node::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.22), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.mine-node:hover,
+.mine-node:focus {
+    outline: none;
+    transform: translateY(-3px);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 12px 22px rgba(10, 16, 32, 0.5);
+}
+
+.mine-node:hover::before,
+.mine-node:focus::before {
+    opacity: 1;
+}
+
+.mine-node.active {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.6), 0 16px 26px rgba(0, 0, 0, 0.45);
+}
+
+.node-label {
+    font-size: 1.05rem;
+}
+
+.node-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.node-level {
+    color: var(--accent-emerald);
+    font-weight: 700;
+}
+
+.mine-details {
+    position: relative;
+    z-index: 1;
+    padding: 1.75rem 1.5rem;
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    background: linear-gradient(180deg, rgba(37, 44, 66, 0.95) 0%, rgba(18, 22, 34, 0.95) 100%);
+    box-shadow: inset 0 0 42px rgba(6, 10, 20, 0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mine-detail-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--accent-gold);
+}
+
+.mine-detail-subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.mine-detail-description {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.45;
+}
+
+.mine-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.mine-stats div {
+    background: rgba(20, 24, 36, 0.85);
+    border-radius: 12px;
+    padding: 0.75rem;
+    border: 1px solid rgba(115, 194, 251, 0.2);
+    text-align: center;
+}
+
+.mine-stats dt {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.mine-stats dd {
+    margin: 0.35rem 0 0;
+    font-weight: 700;
+    color: var(--accent-sky);
+    font-size: 1rem;
+}
+
+.mine-start {
+    align-self: flex-start;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.85), rgba(107, 191, 89, 0.85));
+    color: #12141e;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.mine-start:hover,
+.mine-start:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.45);
+}
+
+.mine-start:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+.mine-progress {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(115, 194, 251, 0.4);
+    background: rgba(16, 20, 30, 0.9);
+    overflow: hidden;
+}
+
+.mine-progress .progress-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(115, 194, 251, 0.9), rgba(107, 191, 89, 0.9));
+    box-shadow: 0 0 16px rgba(115, 194, 251, 0.5);
+    transition: width 0.1s ease;
+}
+
+.mine-status {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.mine-log-wrap {
+    margin-top: 0.5rem;
+}
+
+.mine-log-wrap h4 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    color: var(--accent-gold);
+}
+
+.mine-log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.mine-log li {
+    background: rgba(19, 23, 35, 0.9);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(115, 194, 251, 0.18);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.mine-log time {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+}
+
 .bank-shop {
     background: rgba(20, 24, 34, 0.85);
 }
@@ -325,5 +585,13 @@ body::before {
 
     .main-panel {
         padding: 1.5rem;
+    }
+
+    .mining-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .mine-stats {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 }
