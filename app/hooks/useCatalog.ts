@@ -1,18 +1,7 @@
 import { useMemo } from "react";
-import { getComponents, getMicrocontrollers } from "@/lib/catalog";
-import type { Component, Microcontroller } from "@/types";
-
-interface CatalogData {
-  microcontrollers: Microcontroller[];
-  components: Component[];
-}
+import { getCatalog } from "@/lib/catalog";
+import type { CatalogData } from "@/types";
 
 export function useCatalog(): CatalogData {
-  return useMemo(
-    () => ({
-      microcontrollers: getMicrocontrollers(),
-      components: getComponents(),
-    }),
-    []
-  );
+  return useMemo(() => getCatalog(), []);
 }

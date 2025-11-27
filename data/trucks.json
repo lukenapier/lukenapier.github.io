@@ -1,0 +1,29 @@
+[
+  {
+    "id": "trucks-rkp-180",
+    "name": "180mm RKP Carve",
+    "category": "trucks",
+    "widthMm": 180,
+    "truckType": "RKP",
+    "mountCompatibility": ["top-mount", "drop-through"],
+    "notes": "Responsive turning with stable center."
+  },
+  {
+    "id": "trucks-pkp-170",
+    "name": "170mm PKP Street",
+    "category": "trucks",
+    "widthMm": 170,
+    "truckType": "PKP",
+    "mountCompatibility": ["top-mount"],
+    "notes": "Low ride height and quick lean for urban riding."
+  },
+  {
+    "id": "trucks-rkp-184",
+    "name": "184mm RKP Downhill",
+    "category": "trucks",
+    "widthMm": 184,
+    "truckType": "RKP",
+    "mountCompatibility": ["top-mount"],
+    "notes": "Precision feel for speed-focused builds."
+  }
+]

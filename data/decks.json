@@ -1,0 +1,29 @@
+[
+  {
+    "id": "deck-commuter-38",
+    "name": "Commuter 38\" Top-Mount",
+    "category": "deck",
+    "lengthCm": 97,
+    "flex": "medium",
+    "mountStyle": "top-mount",
+    "notes": "Stable carving deck with mellow concave."
+  },
+  {
+    "id": "deck-drop-40",
+    "name": "Drop-Through 40\" Cruiser",
+    "category": "deck",
+    "lengthCm": 102,
+    "flex": "flexy",
+    "mountStyle": "drop-through",
+    "notes": "Lower ride height for push-friendly commuting."
+  },
+  {
+    "id": "deck-downhill-37",
+    "name": "Downhill 37\" Stiff",
+    "category": "deck",
+    "lengthCm": 94,
+    "flex": "stiff",
+    "mountStyle": "top-mount",
+    "notes": "Locked-in stance for high-speed stability."
+  }
+]
