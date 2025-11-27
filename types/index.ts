@@ -15,13 +15,17 @@ export interface BoardComponent {
   category: ComponentCategory;
   description?: string;
   notes?: string;
+  tags?: string[];
 }
 
 export interface Deck extends BoardComponent {
   category: "deck";
   lengthCm: number;
-  flex: "stiff" | "medium" | "flexy";
-  mountStyle: "top-mount" | "drop-through";
+  wheelbaseCm?: number;
+  widthCm?: number;
+  flex?: "stiff" | "medium" | "flexy";
+  mountStyle: "top-mount" | "drop-through" | "drop-deck";
+  deckStyle?: "commuter" | "freeride" | "downhill" | "carver" | "cruiser";
 }
 
 export interface Trucks extends BoardComponent {
@@ -29,28 +33,39 @@ export interface Trucks extends BoardComponent {
   widthMm: number;
   truckType: "RKP" | "PKP";
   mountCompatibility: Array<"top-mount" | "drop-through">;
+  baseplateAngleDeg?: number;
+  axleDiameterMm?: number;
 }
 
 export interface Wheels extends BoardComponent {
   category: "wheels";
   diameterMm: number;
   hardnessA: number;
-  contactPatchMm: number;
+  contactPatchMm?: number;
+  widthMm?: number;
   wheelType: "street" | "all-terrain";
+  lipShape?: "square" | "rounded";
 }
 
 export interface Battery extends BoardComponent {
   category: "battery";
   capacityWh: number;
   voltageClass: VoltageClass;
-  continuousDischargeA: number;
+  continuousDischargeA?: number;
+  configuration?: string;
+  cellFormat?: string;
+  smartBms?: boolean;
 }
 
 export interface Esc extends BoardComponent {
   category: "esc";
   supportedVoltageClasses: VoltageClass[];
-  maxContinuousCurrentA: number;
+  maxContinuousCurrentA?: number;
   motorCount: "single" | "dual";
+  connectors?: string[];
+  hasBluetooth?: boolean;
+  hasTelemetry?: boolean;
+  waterproofRating?: string;
 }
 
 export interface DriveKit extends BoardComponent {
@@ -59,12 +74,19 @@ export interface DriveKit extends BoardComponent {
   supportedVoltageClasses: VoltageClass[];
   maxPowerW: number;
   profile: "high_torque" | "balanced" | "high_speed";
+  driveType?: "belt" | "gear" | "hub" | "direct";
+  ratio?: string;
+  wheelCompatibility?: string;
 }
 
 export interface Remote extends BoardComponent {
   category: "remote";
   frequency: string;
   compatibleEscFamilies?: string[];
+  triggerStyle?: "trigger" | "thumbwheel";
+  hasTelemetry?: boolean;
+  ridingModes?: number;
+  waterproofRating?: string;
 }
 
 export interface BuildState {

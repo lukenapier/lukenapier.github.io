@@ -6,8 +6,11 @@
     "diameterMm": 90,
     "hardnessA": 78,
     "contactPatchMm": 56,
+    "widthMm": 52,
     "wheelType": "street",
-    "notes": "Grippy urethane for smooth pavement."
+    "lipShape": "square",
+    "notes": "Grippy urethane for smooth pavement.",
+    "tags": ["commuter", "carve"]
   },
   {
     "id": "wheels-street-97",
@@ -16,8 +19,24 @@
     "diameterMm": 97,
     "hardnessA": 76,
     "contactPatchMm": 60,
+    "widthMm": 55,
     "wheelType": "street",
-    "notes": "Extra damping for rougher bike paths."
+    "lipShape": "rounded",
+    "notes": "Extra damping for rougher bike paths.",
+    "tags": ["commuter", "comfort"]
+  },
+  {
+    "id": "wheels-at-105",
+    "name": "105mm Cloud Hybrid",
+    "category": "wheels",
+    "diameterMm": 105,
+    "hardnessA": 78,
+    "contactPatchMm": 62,
+    "widthMm": 60,
+    "wheelType": "all-terrain",
+    "lipShape": "rounded",
+    "notes": "Soft foam core street/AT hybrid for pothole-heavy routes.",
+    "tags": ["comfort", "commuter", "off-road"]
   },
   {
     "id": "wheels-at-110",
@@ -26,7 +45,10 @@
     "diameterMm": 110,
     "hardnessA": 74,
     "contactPatchMm": 64,
+    "widthMm": 65,
     "wheelType": "all-terrain",
-    "notes": "Tall profile for mixed pavement and packed dirt."
+    "lipShape": "rounded",
+    "notes": "Tall profile for mixed pavement and packed dirt.",
+    "tags": ["off-road", "adventure"]
   }
 ]

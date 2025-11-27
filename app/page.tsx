@@ -16,6 +16,93 @@ import type {
   BuildPart,
 } from "@/types";
 
+function capitalize(word?: string) {
+  if (!word) return "";
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function formatDeckSummary(deck: Deck) {
+  const style = deck.deckStyle ? capitalize(deck.deckStyle) : capitalize(deck.mountStyle);
+  const flexLabel = deck.flex ? `${deck.flex} flex` : undefined;
+  return [
+    `${deck.lengthCm}cm`,
+    style,
+    flexLabel,
+    deck.wheelbaseCm ? `${deck.wheelbaseCm}cm wheelbase` : undefined,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatTrucksSummary(trucks: Trucks) {
+  const angle = trucks.baseplateAngleDeg ? `${trucks.baseplateAngleDeg}°` : undefined;
+  return [`${trucks.widthMm}mm`, trucks.truckType, angle].filter(Boolean).join(" · ");
+}
+
+function formatWheelsSummary(wheels: Wheels) {
+  const shape = wheels.lipShape ? `${wheels.lipShape} lip` : undefined;
+  return [`${wheels.diameterMm}mm`, `${wheels.hardnessA}A`, wheels.wheelType, shape]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatBatterySummary(battery: Battery) {
+  return [
+    `${battery.capacityWh}Wh`,
+    battery.voltageClass,
+    battery.configuration,
+    battery.cellFormat,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatEscSummary(esc: Esc) {
+  const motorLabel = esc.motorCount === "dual" ? "Dual" : "Single";
+  const telemetryLabel = esc.hasTelemetry ? "Telemetry" : undefined;
+  return [
+    `Supports ${esc.supportedVoltageClasses.join("/")}`,
+    `${motorLabel} motor`,
+    telemetryLabel,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function formatDriveKitSummary(driveKit: DriveKit) {
+  const type = driveKit.driveType ? capitalize(driveKit.driveType) : "Belt";
+  const profile = driveKit.profile.replace("_", " ");
+  return [type, `${driveKit.kv}KV`, driveKit.ratio, profile].filter(Boolean).join(" · ");
+}
+
+function formatRemoteSummary(remote: Remote) {
+  const control = remote.triggerStyle ? `${capitalize(remote.triggerStyle)} control` : undefined;
+  const telemetry = remote.hasTelemetry ? "Telemetry" : undefined;
+  return [control, remote.frequency, telemetry].filter(Boolean).join(" · ");
+}
+
+function getKeySpec(item?: BuildPart) {
+  if (!item) return "";
+  switch (item.category) {
+    case "deck":
+      return formatDeckSummary(item);
+    case "trucks":
+      return formatTrucksSummary(item);
+    case "wheels":
+      return formatWheelsSummary(item);
+    case "battery":
+      return formatBatterySummary(item);
+    case "esc":
+      return formatEscSummary(item);
+    case "drive_kit":
+      return formatDriveKitSummary(item);
+    case "remote":
+      return formatRemoteSummary(item);
+    default:
+      return "";
+  }
+}
+
 function SectionHeader({
   title,
   subtitle,
@@ -102,6 +189,40 @@ export default function HomePage() {
 
   const validations = useMemo(() => evaluateBuild(build), [build]);
 
+  const selectedParts = useMemo(
+    () =>
+      [
+        build.selectedDeck,
+        build.selectedTrucks,
+        build.selectedWheels,
+        build.selectedBattery,
+        build.selectedEsc,
+        build.selectedDriveKit,
+        build.selectedRemote,
+      ].filter(Boolean) as BuildPart[],
+    [build]
+  );
+
+  const sharedIntentTags = useMemo(() => {
+    const partsWithTags = selectedParts.filter((part) => part.tags && part.tags.length);
+    const total = partsWithTags.length;
+    if (!total) return undefined;
+
+    const counts = new Map<string, number>();
+    partsWithTags.forEach((part) => {
+      part.tags?.forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1));
+    });
+
+    if (!counts.size) return undefined;
+
+    const max = Math.max(...Array.from(counts.values()));
+    if (max < Math.ceil(total * 0.6)) return undefined;
+
+    return Array.from(counts.entries())
+      .filter(([, count]) => count === max)
+      .map(([tag]) => tag);
+  }, [selectedParts]);
+
   const handleDeckSelect = (deck: Deck) => setBuild((prev) => ({ ...prev, selectedDeck: deck }));
   const handleTrucksSelect = (trucks: Trucks) =>
     setBuild((prev) => ({ ...prev, selectedTrucks: trucks }));
@@ -123,47 +244,37 @@ export default function HomePage() {
     {
       label: "Deck",
       item: build.selectedDeck,
-      specs: (item?: BuildPart) =>
-        item?.category === "deck" ? `${item.lengthCm}cm · ${item.flex} flex` : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "Trucks",
       item: build.selectedTrucks,
-      specs: (item?: BuildPart) =>
-        item?.category === "trucks" ? `${item.widthMm}mm · ${item.truckType}` : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "Wheels",
       item: build.selectedWheels,
-      specs: (item?: BuildPart) =>
-        item?.category === "wheels" ? `${item.diameterMm}mm · ${item.hardnessA}A` : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "Battery",
       item: build.selectedBattery,
-      specs: (item?: BuildPart) =>
-        item?.category === "battery" ? `${item.capacityWh}Wh · ${item.voltageClass}` : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "ESC",
       item: build.selectedEsc,
-      specs: (item?: BuildPart) =>
-        item?.category === "esc"
-          ? `${item.supportedVoltageClasses.join("/")} · ${item.maxContinuousCurrentA}A`
-          : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "Drive Kit",
       item: build.selectedDriveKit,
-      specs: (item?: BuildPart) =>
-        item?.category === "drive_kit"
-          ? `${item.kv}KV · ${item.supportedVoltageClasses.join("/")}`
-          : undefined,
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
     {
       label: "Remote",
       item: build.selectedRemote,
-      specs: (item?: BuildPart) => (item?.category === "remote" ? `${item.frequency}` : undefined),
+      specs: (item?: BuildPart) => (item ? getKeySpec(item) : undefined),
     },
   ];
 
@@ -220,7 +331,13 @@ export default function HomePage() {
                     key={deck.id}
                     title={deck.name}
                     description={deck.notes}
-                    meta={[`${deck.lengthCm}cm`, `${deck.mountStyle}`, `${deck.flex} flex`]}
+                    meta={
+                      [
+                        `${deck.lengthCm}cm`,
+                        deck.deckStyle ? capitalize(deck.deckStyle) : deck.mountStyle,
+                        deck.flex ? `${deck.flex} flex` : undefined,
+                      ].filter(Boolean) as string[]
+                    }
                     onSelect={() => handleDeckSelect(deck)}
                     isSelected={build.selectedDeck?.id === deck.id}
                     badge="Deck"
@@ -256,7 +373,13 @@ export default function HomePage() {
                     key={truck.id}
                     title={truck.name}
                     description={truck.notes}
-                    meta={[`${truck.widthMm}mm`, truck.truckType, `${truck.mountCompatibility.join(" & ")}`]}
+                    meta={
+                      [
+                        `${truck.widthMm}mm`,
+                        `${truck.truckType}`,
+                        truck.baseplateAngleDeg ? `${truck.baseplateAngleDeg}° baseplate` : undefined,
+                      ].filter(Boolean) as string[]
+                    }
                     onSelect={() => handleTrucksSelect(truck)}
                     isSelected={build.selectedTrucks?.id === truck.id}
                     badge="Trucks"
@@ -292,7 +415,13 @@ export default function HomePage() {
                     key={wheel.id}
                     title={wheel.name}
                     description={wheel.notes}
-                    meta={[`${wheel.diameterMm}mm`, `${wheel.hardnessA}A`, wheel.wheelType]}
+                    meta={
+                      [
+                        `${wheel.diameterMm}mm`,
+                        `${wheel.hardnessA}A`,
+                        wheel.wheelType === "all-terrain" ? "All-terrain" : "Street",
+                      ]
+                    }
                     onSelect={() => handleWheelsSelect(wheel)}
                     isSelected={build.selectedWheels?.id === wheel.id}
                     badge="Wheels"
@@ -318,7 +447,13 @@ export default function HomePage() {
                     key={battery.id}
                     title={battery.name}
                     description={battery.notes}
-                    meta={[`${battery.capacityWh}Wh`, `${battery.voltageClass}`, `${battery.continuousDischargeA}A`]}
+                    meta={
+                      [
+                        `${battery.capacityWh}Wh`,
+                        `${battery.voltageClass}`,
+                        battery.configuration ?? `${battery.continuousDischargeA ?? ""}A`,
+                      ].filter(Boolean) as string[]
+                    }
                     onSelect={() => handleBatterySelect(battery)}
                     isSelected={build.selectedBattery?.id === battery.id}
                     badge="Battery"
@@ -340,7 +475,13 @@ export default function HomePage() {
                     key={esc.id}
                     title={esc.name}
                     description={esc.notes}
-                    meta={[`Supports ${esc.supportedVoltageClasses.join("/")}`, `${esc.maxContinuousCurrentA}A`, esc.motorCount]}
+                    meta={
+                      [
+                        `Supports ${esc.supportedVoltageClasses.join("/")}`,
+                        `${esc.motorCount === "dual" ? "Dual" : "Single"} motor`,
+                        esc.hasBluetooth ? "Bluetooth" : esc.connectors?.[0],
+                      ].filter(Boolean) as string[]
+                    }
                     onSelect={() => handleEscSelect(esc)}
                     isSelected={build.selectedEsc?.id === esc.id}
                     badge="ESC"
@@ -362,11 +503,13 @@ export default function HomePage() {
                     key={driveKit.id}
                     title={driveKit.name}
                     description={driveKit.notes}
-                    meta={[
-                      `${driveKit.kv}KV`,
-                      `${driveKit.supportedVoltageClasses.join("/")}`,
-                      driveKit.profile.replace("_", " "),
-                    ]}
+                    meta={
+                      [
+                        `${capitalize(driveKit.driveType || "belt")} drive`,
+                        `${driveKit.kv}KV`,
+                        driveKit.ratio || driveKit.profile.replace("_", " "),
+                      ]
+                    }
                     onSelect={() => handleDriveKitSelect(driveKit)}
                     isSelected={build.selectedDriveKit?.id === driveKit.id}
                     badge="Drive Kit"
@@ -410,7 +553,15 @@ export default function HomePage() {
                     key={remote.id}
                     title={remote.name}
                     description={remote.notes}
-                    meta={[remote.frequency, ...(remote.compatibleEscFamilies || [])]}
+                    meta={
+                      [
+                        remote.triggerStyle
+                          ? `${capitalize(remote.triggerStyle)} control`
+                          : "Trigger control",
+                        remote.frequency,
+                        remote.hasTelemetry ? "Telemetry" : remote.compatibleEscFamilies?.[0],
+                      ].filter(Boolean) as string[]
+                    }
                     onSelect={() => handleRemoteSelect(remote)}
                     isSelected={build.selectedRemote?.id === remote.id}
                     badge="Remote"
@@ -437,32 +588,68 @@ export default function HomePage() {
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Deck</p>
                 <p>{build.selectedDeck?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedDeck ? formatDeckSummary(build.selectedDeck) : "Select a deck to view specs"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Trucks</p>
                 <p>{build.selectedTrucks?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedTrucks
+                    ? formatTrucksSummary(build.selectedTrucks)
+                    : "Choose trucks to see stance"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Wheels</p>
                 <p>{build.selectedWheels?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedWheels
+                    ? formatWheelsSummary(build.selectedWheels)
+                    : "Pick wheels to compare diameter and duro"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Battery</p>
                 <p>{build.selectedBattery?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedBattery
+                    ? formatBatterySummary(build.selectedBattery)
+                    : "Select a pack to see Wh and cells"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">ESC</p>
                 <p>{build.selectedEsc?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedEsc ? formatEscSummary(build.selectedEsc) : "Add an ESC to check voltage support"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Drive Kit</p>
                 <p>{build.selectedDriveKit?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedDriveKit
+                    ? formatDriveKitSummary(build.selectedDriveKit)
+                    : "Pick a drive kit to view KV and type"}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Remote</p>
                 <p>{build.selectedRemote?.name || "Not selected"}</p>
+                <p className="text-[11px] text-slate-400">
+                  {build.selectedRemote ? formatRemoteSummary(build.selectedRemote) : "Choose a remote to see controls"}
+                </p>
               </div>
             </div>
+
+            {sharedIntentTags?.length ? (
+              <div className="mt-4 rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-3 text-sm text-emerald-100">
+                <p className="text-[11px] uppercase tracking-wide text-emerald-300">Build intent</p>
+                <p className="font-semibold">This build leans toward: {sharedIntentTags.map(capitalize).join(" / ")}</p>
+              </div>
+            ) : null}
           </div>
 
           <div className="rounded-xl border border-dashed border-slate-700 bg-slate-900/40 p-4 space-y-2">

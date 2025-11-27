@@ -5,15 +5,25 @@
     "category": "remote",
     "frequency": "2.4GHz",
     "compatibleEscFamilies": ["VESC-style", "Hobby dual"],
-    "notes": "Basic throttle with cruise toggle."
+    "triggerStyle": "trigger",
+    "hasTelemetry": false,
+    "ridingModes": 2,
+    "waterproofRating": "IP54",
+    "notes": "Basic throttle with cruise toggle.",
+    "tags": ["beginner", "budget"]
   },
   {
     "id": "remote-telemetry",
-    "name": "Telemetry Remote",
+    "name": "Telemetry GT Remote",
     "category": "remote",
     "frequency": "2.4GHz",
     "compatibleEscFamilies": ["VESC-style"],
-    "notes": "Displays speed and battery status."
+    "triggerStyle": "trigger",
+    "hasTelemetry": true,
+    "ridingModes": 4,
+    "waterproofRating": "IP55",
+    "notes": "Displays speed and battery status with haptic alerts.",
+    "tags": ["performance", "speed"]
   },
   {
     "id": "remote-compact",
@@ -21,6 +31,11 @@
     "category": "remote",
     "frequency": "2.4GHz",
     "compatibleEscFamilies": ["Light ESC"],
-    "notes": "Pocketable remote for travel boards."
+    "triggerStyle": "thumbwheel",
+    "hasTelemetry": false,
+    "ridingModes": 2,
+    "waterproofRating": "IPX4",
+    "notes": "Pocketable remote for travel boards.",
+    "tags": ["travel", "commuter"]
   }
 ]
