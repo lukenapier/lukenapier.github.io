@@ -1,29 +1,38 @@
 [
   {
     "id": "trucks-rkp-180",
-    "name": "180mm RKP Carve",
+    "name": "180mm 50° RKP Carve",
     "category": "trucks",
     "widthMm": 180,
     "truckType": "RKP",
     "mountCompatibility": ["top-mount", "drop-through"],
-    "notes": "Responsive turning with stable center."
+    "baseplateAngleDeg": 50,
+    "axleDiameterMm": 8,
+    "notes": "Responsive turning with stable center and tall bushings.",
+    "tags": ["carve", "commuter"]
   },
   {
     "id": "trucks-pkp-170",
-    "name": "170mm PKP Street",
+    "name": "170mm 44° PKP Street",
     "category": "trucks",
     "widthMm": 170,
     "truckType": "PKP",
     "mountCompatibility": ["top-mount"],
-    "notes": "Low ride height and quick lean for urban riding."
+    "baseplateAngleDeg": 44,
+    "axleDiameterMm": 8,
+    "notes": "Low ride height and quick lean for urban riding.",
+    "tags": ["commuter", "budget"]
   },
   {
     "id": "trucks-rkp-184",
-    "name": "184mm RKP Downhill",
+    "name": "184mm 45° Precision RKP",
     "category": "trucks",
     "widthMm": 184,
     "truckType": "RKP",
     "mountCompatibility": ["top-mount"],
-    "notes": "Precision feel for speed-focused builds."
+    "baseplateAngleDeg": 45,
+    "axleDiameterMm": 8,
+    "notes": "CNC hangers with tight tolerances for speed-focused builds.",
+    "tags": ["speed", "downhill"]
   }
 ]

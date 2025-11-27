@@ -1,29 +1,54 @@
 [
   {
     "id": "deck-commuter-38",
-    "name": "Commuter 38\" Top-Mount",
+    "name": "38\" Commuter Top-Mount",
     "category": "deck",
     "lengthCm": 97,
+    "wheelbaseCm": 70,
+    "widthCm": 23.5,
     "flex": "medium",
     "mountStyle": "top-mount",
-    "notes": "Stable carving deck with mellow concave."
+    "deckStyle": "commuter",
+    "notes": "Stable carving deck with mellow concave and foot-stop friendly nose.",
+    "tags": ["commuter", "beginner", "carve"]
   },
   {
     "id": "deck-drop-40",
-    "name": "Drop-Through 40\" Cruiser",
+    "name": "40\" Drop-Through Cruiser",
     "category": "deck",
     "lengthCm": 102,
+    "wheelbaseCm": 75,
+    "widthCm": 24,
     "flex": "flexy",
     "mountStyle": "drop-through",
-    "notes": "Lower ride height for push-friendly commuting."
+    "deckStyle": "cruiser",
+    "notes": "Lower ride height for push-friendly commuting and smooth carving.",
+    "tags": ["commuter", "comfort", "beginner"]
   },
   {
     "id": "deck-downhill-37",
-    "name": "Downhill 37\" Stiff",
+    "name": "37\" Downhill Stiff",
     "category": "deck",
     "lengthCm": 94,
+    "wheelbaseCm": 68,
+    "widthCm": 23,
     "flex": "stiff",
     "mountStyle": "top-mount",
-    "notes": "Locked-in stance for high-speed stability."
+    "deckStyle": "downhill",
+    "notes": "Locked-in stance with micro-drop pockets for high-speed stability.",
+    "tags": ["speed", "downhill"]
+  },
+  {
+    "id": "deck-dropdeck-39",
+    "name": "39\" Drop-Deck Carver",
+    "category": "deck",
+    "lengthCm": 99,
+    "wheelbaseCm": 72,
+    "widthCm": 23.5,
+    "flex": "medium",
+    "mountStyle": "drop-deck",
+    "deckStyle": "carver",
+    "notes": "Sunken platform with rocker for locked-in commuting and carving.",
+    "tags": ["commuter", "comfort", "carve"]
   }
 ]

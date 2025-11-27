@@ -1,12 +1,17 @@
 [
   {
     "id": "esc-dual-10s",
-    "name": "Dual ESC 10S Ready",
+    "name": "Dual Touring ESC (8S/10S)",
     "category": "esc",
     "supportedVoltageClasses": ["8S", "10S"],
     "maxContinuousCurrentA": 60,
     "motorCount": "dual",
-    "notes": "Great for 2WD commuter setups."
+    "connectors": ["MR60", "sensor"],
+    "hasBluetooth": true,
+    "hasTelemetry": true,
+    "waterproofRating": "IP65",
+    "notes": "Great for 2WD commuter setups with app tuning.",
+    "tags": ["commuter", "beginner"]
   },
   {
     "id": "esc-performance-12s",
@@ -14,16 +19,26 @@
     "category": "esc",
     "supportedVoltageClasses": ["10S", "12S"],
     "maxContinuousCurrentA": 80,
-    "motorCount": "single",
-    "notes": "Designed for high-voltage builds."
+    "motorCount": "dual",
+    "connectors": ["QS8", "sensor"],
+    "hasBluetooth": true,
+    "hasTelemetry": true,
+    "waterproofRating": "IP67",
+    "notes": "Designed for high-voltage builds with active cooling path.",
+    "tags": ["speed", "performance"]
   },
   {
     "id": "esc-urban-8s",
-    "name": "Urban ESC 8S",
+    "name": "Compact ESC 6S/8S",
     "category": "esc",
     "supportedVoltageClasses": ["6S", "8S"],
     "maxContinuousCurrentA": 50,
     "motorCount": "single",
-    "notes": "Efficient controller for lightweight boards."
+    "connectors": ["XT60"],
+    "hasBluetooth": false,
+    "hasTelemetry": false,
+    "waterproofRating": "IP54",
+    "notes": "Efficient controller for lightweight boards and travel builds.",
+    "tags": ["commuter", "budget", "travel"]
   }
 ]

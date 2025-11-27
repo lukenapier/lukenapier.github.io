@@ -6,16 +6,24 @@
     "capacityWh": 400,
     "voltageClass": "10S",
     "continuousDischargeA": 60,
-    "notes": "Balanced range for daily riding."
+    "configuration": "10S3P 21700",
+    "cellFormat": "21700",
+    "smartBms": true,
+    "notes": "Balanced range for daily riding with built-in BMS telemetry.",
+    "tags": ["commuter", "beginner"]
   },
   {
-    "id": "battery-12s-500",
-    "name": "12S 500Wh Performance Pack",
+    "id": "battery-12s-540",
+    "name": "12S 540Wh Performance Pack",
     "category": "battery",
-    "capacityWh": 500,
+    "capacityWh": 540,
     "voltageClass": "12S",
-    "continuousDischargeA": 80,
-    "notes": "High-voltage pack for strong acceleration."
+    "continuousDischargeA": 90,
+    "configuration": "12S3P 21700",
+    "cellFormat": "21700",
+    "smartBms": true,
+    "notes": "High-voltage pack for strong acceleration and braking headroom.",
+    "tags": ["speed", "performance"]
   },
   {
     "id": "battery-8s-320",
@@ -24,6 +32,23 @@
     "capacityWh": 320,
     "voltageClass": "8S",
     "continuousDischargeA": 50,
-    "notes": "Lightweight pack for compact builds."
+    "configuration": "8S2P 18650",
+    "cellFormat": "18650",
+    "smartBms": false,
+    "notes": "Lightweight pack for compact travel boards.",
+    "tags": ["commuter", "budget", "travel"]
+  },
+  {
+    "id": "battery-10s-450",
+    "name": "10S 450Wh Trail Pack",
+    "category": "battery",
+    "capacityWh": 450,
+    "voltageClass": "10S",
+    "continuousDischargeA": 70,
+    "configuration": "10S3P 18650",
+    "cellFormat": "18650",
+    "smartBms": false,
+    "notes": "Ruggedized enclosure for mixed-surface commuting.",
+    "tags": ["off-road", "adventure"]
   }
 ]
