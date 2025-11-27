@@ -1,0 +1,38 @@
+[
+  {
+    "id": "esp32-devkit-v1",
+    "name": "ESP32 DevKit V1",
+    "voltage": 3.3,
+    "gpioCount": 30,
+    "protocols": ["i2c", "spi", "uart", "analog", "digital"],
+    "maxCurrent": 500,
+    "notes": "Dual-core, Wi-Fi/Bluetooth, common development board layout"
+  },
+  {
+    "id": "arduino-uno-r3",
+    "name": "Arduino Uno R3",
+    "voltage": 5,
+    "gpioCount": 14,
+    "protocols": ["i2c", "spi", "uart", "analog", "digital"],
+    "maxCurrent": 200,
+    "notes": "5V logic, classic ATmega328P"
+  },
+  {
+    "id": "raspberry-pi-pico",
+    "name": "Raspberry Pi Pico",
+    "voltage": 3.3,
+    "gpioCount": 26,
+    "protocols": ["i2c", "spi", "uart", "analog", "digital"],
+    "maxCurrent": 300,
+    "notes": "RP2040 dual-core with flexible I/O"
+  },
+  {
+    "id": "teensy-4-1",
+    "name": "Teensy 4.1",
+    "voltage": 3.3,
+    "gpioCount": 55,
+    "protocols": ["i2c", "spi", "uart", "analog", "digital"],
+    "maxCurrent": 800,
+    "notes": "High-performance ARM Cortex-M7"
+  }
+]
