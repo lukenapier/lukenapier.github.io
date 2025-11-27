@@ -1,0 +1,26 @@
+[
+  {
+    "id": "remote-simple",
+    "name": "Simple Trigger Remote",
+    "category": "remote",
+    "frequency": "2.4GHz",
+    "compatibleEscFamilies": ["VESC-style", "Hobby dual"],
+    "notes": "Basic throttle with cruise toggle."
+  },
+  {
+    "id": "remote-telemetry",
+    "name": "Telemetry Remote",
+    "category": "remote",
+    "frequency": "2.4GHz",
+    "compatibleEscFamilies": ["VESC-style"],
+    "notes": "Displays speed and battery status."
+  },
+  {
+    "id": "remote-compact",
+    "name": "Compact Thumbwheel",
+    "category": "remote",
+    "frequency": "2.4GHz",
+    "compatibleEscFamilies": ["Light ESC"],
+    "notes": "Pocketable remote for travel boards."
+  }
+]

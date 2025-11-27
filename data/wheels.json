@@ -1,0 +1,32 @@
+[
+  {
+    "id": "wheels-street-90",
+    "name": "90mm Street Grip",
+    "category": "wheels",
+    "diameterMm": 90,
+    "hardnessA": 78,
+    "contactPatchMm": 56,
+    "wheelType": "street",
+    "notes": "Grippy urethane for smooth pavement."
+  },
+  {
+    "id": "wheels-street-97",
+    "name": "97mm Comfort Roll",
+    "category": "wheels",
+    "diameterMm": 97,
+    "hardnessA": 76,
+    "contactPatchMm": 60,
+    "wheelType": "street",
+    "notes": "Extra damping for rougher bike paths."
+  },
+  {
+    "id": "wheels-at-110",
+    "name": "110mm All-Terrain",
+    "category": "wheels",
+    "diameterMm": 110,
+    "hardnessA": 74,
+    "contactPatchMm": 64,
+    "wheelType": "all-terrain",
+    "notes": "Tall profile for mixed pavement and packed dirt."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "drivekit-ht-170",
+    "name": "170KV Torque Drive",
+    "category": "drive_kit",
+    "kv": 170,
+    "supportedVoltageClasses": ["8S", "10S"],
+    "maxPowerW": 2800,
+    "profile": "high_torque",
+    "notes": "Geared for hill climbing and heavier riders."
+  },
+  {
+    "id": "drivekit-balanced-190",
+    "name": "190KV Balanced Drive",
+    "category": "drive_kit",
+    "kv": 190,
+    "supportedVoltageClasses": ["10S", "12S"],
+    "maxPowerW": 3200,
+    "profile": "balanced",
+    "notes": "Blend of acceleration and top speed."
+  },
+  {
+    "id": "drivekit-speed-200",
+    "name": "200KV Speed Drive",
+    "category": "drive_kit",
+    "kv": 200,
+    "supportedVoltageClasses": ["10S", "12S"],
+    "maxPowerW": 3400,
+    "profile": "high_speed",
+    "notes": "Optimized for fast flats."
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "battery-10s-400",
+    "name": "10S 400Wh Commuter Pack",
+    "category": "battery",
+    "capacityWh": 400,
+    "voltageClass": "10S",
+    "continuousDischargeA": 60,
+    "notes": "Balanced range for daily riding."
+  },
+  {
+    "id": "battery-12s-500",
+    "name": "12S 500Wh Performance Pack",
+    "category": "battery",
+    "capacityWh": 500,
+    "voltageClass": "12S",
+    "continuousDischargeA": 80,
+    "notes": "High-voltage pack for strong acceleration."
+  },
+  {
+    "id": "battery-8s-320",
+    "name": "8S 320Wh Urban Pack",
+    "category": "battery",
+    "capacityWh": 320,
+    "voltageClass": "8S",
+    "continuousDischargeA": 50,
+    "notes": "Lightweight pack for compact builds."
+  }
+]
