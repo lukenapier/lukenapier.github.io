@@ -13,6 +13,7 @@ import type {
   Remote,
   Trucks,
   Wheels,
+  BuildPart,
 } from "@/types";
 
 function SectionHeader({
@@ -114,40 +115,55 @@ export default function HomePage() {
   const handleRemoteSelect = (remote: Remote) =>
     setBuild((prev) => ({ ...prev, selectedRemote: remote }));
 
-  const bomEntries = [
-    { label: "Deck", item: build.selectedDeck, specs: (deck?: Deck) => deck && `${deck.lengthCm}cm · ${deck.flex} flex` },
+  const bomEntries: Array<{
+    label: string;
+    item: BuildPart | undefined;
+    specs: (item?: BuildPart) => string | undefined;
+  }> = [
+    {
+      label: "Deck",
+      item: build.selectedDeck,
+      specs: (item?: BuildPart) =>
+        item?.category === "deck" ? `${item.lengthCm}cm · ${item.flex} flex` : undefined,
+    },
     {
       label: "Trucks",
       item: build.selectedTrucks,
-      specs: (trucks?: Trucks) =>
-        trucks && `${trucks.widthMm}mm · ${trucks.truckType}`,
+      specs: (item?: BuildPart) =>
+        item?.category === "trucks" ? `${item.widthMm}mm · ${item.truckType}` : undefined,
     },
     {
       label: "Wheels",
       item: build.selectedWheels,
-      specs: (wheels?: Wheels) => wheels && `${wheels.diameterMm}mm · ${wheels.hardnessA}A`,
+      specs: (item?: BuildPart) =>
+        item?.category === "wheels" ? `${item.diameterMm}mm · ${item.hardnessA}A` : undefined,
     },
     {
       label: "Battery",
       item: build.selectedBattery,
-      specs: (battery?: Battery) =>
-        battery && `${battery.capacityWh}Wh · ${battery.voltageClass}`,
+      specs: (item?: BuildPart) =>
+        item?.category === "battery" ? `${item.capacityWh}Wh · ${item.voltageClass}` : undefined,
     },
     {
       label: "ESC",
       item: build.selectedEsc,
-      specs: (esc?: Esc) => esc && `${esc.supportedVoltageClasses.join("/")} · ${esc.maxContinuousCurrentA}A`,
+      specs: (item?: BuildPart) =>
+        item?.category === "esc"
+          ? `${item.supportedVoltageClasses.join("/")} · ${item.maxContinuousCurrentA}A`
+          : undefined,
     },
     {
       label: "Drive Kit",
       item: build.selectedDriveKit,
-      specs: (driveKit?: DriveKit) =>
-        driveKit && `${driveKit.kv}KV · ${driveKit.supportedVoltageClasses.join("/")}`,
+      specs: (item?: BuildPart) =>
+        item?.category === "drive_kit"
+          ? `${item.kv}KV · ${item.supportedVoltageClasses.join("/")}`
+          : undefined,
     },
     {
       label: "Remote",
       item: build.selectedRemote,
-      specs: (remote?: Remote) => remote && `${remote.frequency}`,
+      specs: (item?: BuildPart) => (item?.category === "remote" ? `${item.frequency}` : undefined),
     },
   ];
 

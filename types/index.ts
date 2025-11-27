@@ -77,6 +77,15 @@ export interface BuildState {
   selectedRemote?: Remote;
 }
 
+export type BuildPart =
+  | Deck
+  | Trucks
+  | Wheels
+  | Battery
+  | Esc
+  | DriveKit
+  | Remote;
+
 export type ValidationSeverity = "error" | "warning";
 
 export interface ValidationResult {
