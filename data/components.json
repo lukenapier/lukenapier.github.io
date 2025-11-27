@@ -1,0 +1,115 @@
+[
+  {
+    "id": "dht22-temp-humidity",
+    "name": "DHT22 Temperature/Humidity",
+    "category": "sensor",
+    "voltage": 3.3,
+    "protocol": "digital",
+    "estimatedCurrent": 2,
+    "requiredPins": 1,
+    "vendor": "Aosong",
+    "description": "Digital temperature and humidity sensor"
+  },
+  {
+    "id": "bme280-env",
+    "name": "BME280 Environmental Sensor",
+    "category": "sensor",
+    "voltage": 3.3,
+    "protocol": "i2c",
+    "estimatedCurrent": 1,
+    "requiredPins": 2,
+    "i2cAddress": "0x76",
+    "vendor": "Bosch",
+    "description": "Temperature, humidity, and pressure sensor"
+  },
+  {
+    "id": "mpu6050-imu",
+    "name": "MPU-6050 6DoF IMU",
+    "category": "sensor",
+    "voltage": 3.3,
+    "protocol": "i2c",
+    "estimatedCurrent": 3,
+    "requiredPins": 2,
+    "i2cAddress": "0x68",
+    "vendor": "InvenSense",
+    "description": "Accelerometer and gyroscope module"
+  },
+  {
+    "id": "ssd1306-oled",
+    "name": "SSD1306 0.96\" OLED Display",
+    "category": "misc",
+    "voltage": 3.3,
+    "protocol": "i2c",
+    "estimatedCurrent": 20,
+    "requiredPins": 2,
+    "i2cAddress": "0x3C",
+    "vendor": "Generic",
+    "description": "128x64 monochrome display"
+  },
+  {
+    "id": "hc05-bluetooth",
+    "name": "HC-05 Bluetooth Module",
+    "category": "communication",
+    "voltage": 5,
+    "protocol": "uart",
+    "estimatedCurrent": 30,
+    "requiredPins": 2,
+    "vendor": "Generic",
+    "description": "Classic Bluetooth serial module"
+  },
+  {
+    "id": "nrf24l01-radio",
+    "name": "nRF24L01+ Radio",
+    "category": "communication",
+    "voltage": 3.3,
+    "protocol": "spi",
+    "estimatedCurrent": 15,
+    "requiredPins": 5,
+    "vendor": "Nordic",
+    "description": "2.4GHz wireless transceiver"
+  },
+  {
+    "id": "buck-step-down",
+    "name": "3A Buck Converter",
+    "category": "power",
+    "voltage": 5,
+    "protocol": "analog",
+    "estimatedCurrent": 0,
+    "requiredPins": 0,
+    "vendor": "Generic",
+    "description": "Step-down regulator for powering 5V peripherals"
+  },
+  {
+    "id": "sg90-servo",
+    "name": "SG90 Micro Servo",
+    "category": "actuator",
+    "voltage": 5,
+    "protocol": "digital",
+    "estimatedCurrent": 250,
+    "requiredPins": 1,
+    "vendor": "TowerPro",
+    "description": "Miniature hobby servo motor"
+  },
+  {
+    "id": "ws2812b-strip",
+    "name": "WS2812B LED Strip (30/m)",
+    "category": "actuator",
+    "voltage": 5,
+    "protocol": "digital",
+    "estimatedCurrent": 1800,
+    "requiredPins": 1,
+    "vendor": "Adafruit",
+    "description": "Individually addressable RGB LEDs"
+  },
+  {
+    "id": "tp4056-lipo-charger",
+    "name": "TP4056 LiPo Charger",
+    "category": "power",
+    "voltage": 5,
+    "protocol": "analog",
+    "estimatedCurrent": 0,
+    "requiredPins": 0,
+    "vendor": "Generic",
+    "description": "Lithium battery charging module"
+  }
+]

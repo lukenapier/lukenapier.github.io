@@ -1,4 +1,10 @@
+"use client";
+
+import { useCatalog } from "./hooks/useCatalog";
+
 export default function HomePage() {
+  const { microcontrollers, components } = useCatalog();
+
   return (
     <main className="min-h-screen flex flex-col">
       {/* Top nav */}
@@ -35,9 +41,46 @@ export default function HomePage() {
               <h3 className="text-xs font-semibold text-slate-400 mb-2">
                 Microcontroller
               </h3>
-              <div className="border border-dashed border-slate-700 rounded-xl p-4 text-xs text-slate-400">
-                This is where you&apos;ll choose a base MCU (ESP32, Arduino Uno,
-                Raspberry Pi Pico, etc.) and see its core specs.
+              <div className="grid gap-3 sm:grid-cols-2">
+                {microcontrollers.map((mcu) => (
+                  <div
+                    key={mcu.id}
+                    className="rounded-xl border border-slate-800 bg-slate-900/70 p-3 shadow-sm hover:border-emerald-500/50 transition"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-slate-100">
+                          {mcu.name}
+                        </p>
+                        <p className="text-[11px] text-slate-400">{mcu.id}</p>
+                      </div>
+                      <span className="rounded-lg bg-emerald-500/10 px-2 py-1 text-[11px] font-semibold text-emerald-300">
+                        {mcu.voltage}V
+                      </span>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-300">
+                      <span className="rounded-full bg-slate-800 px-2 py-1">
+                        {mcu.gpioCount} GPIO
+                      </span>
+                      <span className="rounded-full bg-slate-800 px-2 py-1">
+                        {mcu.maxCurrent} mA max
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[11px] text-slate-400 flex flex-wrap gap-1">
+                      {mcu.protocols.map((protocol) => (
+                        <span
+                          key={protocol}
+                          className="rounded-full bg-slate-800 px-2 py-1 capitalize"
+                        >
+                          {protocol}
+                        </span>
+                      ))}
+                    </div>
+                    {mcu.notes ? (
+                      <p className="mt-2 text-[11px] text-slate-500">{mcu.notes}</p>
+                    ) : null}
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -45,15 +88,46 @@ export default function HomePage() {
               <h3 className="text-xs font-semibold text-slate-400 mb-2">
                 Components
               </h3>
-              <div className="border border-dashed border-slate-700 rounded-xl p-4 space-y-2 text-xs text-slate-400">
-                <p>
-                  Here you&apos;ll search and add sensors, power modules,
-                  communication modules, and actuators to your build.
-                </p>
-                <p className="text-slate-500">
-                  For now this is just a static placeholder. Next iterations
-                  will add real data and state.
-                </p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {components.map((component) => (
+                  <div
+                    key={component.id}
+                    className="rounded-xl border border-slate-800 bg-slate-900/70 p-3 text-xs text-slate-200 shadow-sm hover:border-sky-400/50 transition"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-slate-100">
+                          {component.name}
+                        </p>
+                        <p className="text-[11px] uppercase tracking-wide text-slate-500">
+                          {component.category}
+                        </p>
+                      </div>
+                      <span className="rounded-lg bg-slate-800 px-2 py-1 text-[11px] text-slate-200">
+                        {component.voltage}V
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-400">
+                      {component.description}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-300">
+                      <span className="rounded-full bg-slate-800 px-2 py-1 capitalize">
+                        {component.protocol}
+                      </span>
+                      <span className="rounded-full bg-slate-800 px-2 py-1">
+                        {component.requiredPins} pin{component.requiredPins !== 1 ? "s" : ""}
+                      </span>
+                      <span className="rounded-full bg-slate-800 px-2 py-1">
+                        ~{component.estimatedCurrent} mA
+                      </span>
+                      {component.i2cAddress ? (
+                        <span className="rounded-full bg-slate-800 px-2 py-1">
+                          I2C {component.i2cAddress}
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
