@@ -14,7 +14,7 @@ export function PartCard<T extends BuildPart>({ part, isSelected, onSelect, spec
   const { value, currency } = getPriceInfo(part);
   const priceLabel = formatPrice(value, currency) ?? "See vendor";
 
-  const primaryOffer = part.offers?.[0];
+  const primaryOffer = "offers" in part ? part.offers?.[0] : undefined;
   const productUrl = "productUrl" in part && part.productUrl ? part.productUrl : primaryOffer?.productUrl;
   const vendorName = "vendorName" in part && part.vendorName ? part.vendorName : primaryOffer?.vendorName;
 
