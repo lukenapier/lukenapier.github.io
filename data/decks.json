@@ -123,7 +123,7 @@
     "wheelbaseMinCm": 68.6,
     "wheelbaseMaxCm": 68.6,
     "flex": 5,
-    "weightDeckOnlyLb": 3.3, // mid of 3.1–3.5
+    "weightDeckOnlyLb": 3.3,
     "tags": ["carving", "freestyle", "commuter"],
     "notes": "Compact drop-through with camber, cutouts and kicktails; very popular for responsive carving and light freestyle.",
     "vendorName": "Loaded Boards",
