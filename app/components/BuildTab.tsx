@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PartCard } from "./PartCard";
 import { StepHeader } from "./StepHeader";
@@ -219,6 +219,48 @@ function CategoryPartList({
 }: CategoryPartListProps) {
   const selectedId = getSelectedIdForCategory(build, category);
   const { parts, heading, subtitle } = useMemo(() => getCategoryConfig(category, catalog), [category, catalog]);
+  const [deckQuery, setDeckQuery] = useState("");
+  const [visibleDeckCount, setVisibleDeckCount] = useState(24);
+  const [visibleComparisonCount, setVisibleComparisonCount] = useState(40);
+
+  useEffect(() => {
+    setDeckQuery("");
+    setVisibleDeckCount(24);
+    setVisibleComparisonCount(40);
+  }, [category, parts.length]);
+
+  const normalizedDeckQuery = deckQuery.trim().toLowerCase();
+  const filteredDecks = useMemo(() => {
+    if (category !== "deck") return parts;
+    if (!normalizedDeckQuery) return parts;
+
+    return (parts as Deck[]).filter((deck) => {
+      const haystack = [
+        deck.brand,
+        deck.name,
+        deck.style,
+        deck.tags?.join(" ") ?? "",
+        deck.notes ?? "",
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(normalizedDeckQuery);
+    });
+  }, [category, normalizedDeckQuery, parts]);
+
+  const visibleParts = useMemo(() => {
+    if (category !== "deck") return filteredDecks;
+    return filteredDecks.slice(0, visibleDeckCount);
+  }, [category, filteredDecks, visibleDeckCount]);
+
+  const comparisonDecks = useMemo(() => {
+    if (category !== "deck") return catalog.decks;
+    return filteredDecks.slice(0, visibleComparisonCount) as Deck[];
+  }, [category, catalog.decks, filteredDecks, visibleComparisonCount]);
+
+  const hasMoreDeckCards = category === "deck" && filteredDecks.length > visibleDeckCount;
+  const hasMoreComparisonRows = category === "deck" && filteredDecks.length > visibleComparisonCount;
 
   return (
     <div className="space-y-3">
@@ -227,21 +269,29 @@ function CategoryPartList({
           <h2 className="text-lg font-semibold text-slate-50">{heading}</h2>
           <p className="text-sm text-slate-400">{subtitle}</p>
         </div>
-        <span className="text-[11px] text-slate-500">{parts.length} options</span>
+        <span className="text-[11px] text-slate-500">{filteredDecks.length} options</span>
       </div>
 
       {category === "deck" ? (
-        <button
-          type="button"
-          onClick={() => setShowDeckComparison((v) => !v)}
-          className="text-[11px] rounded-full border border-slate-700 bg-slate-900/80 px-2 py-1 text-slate-300 hover:border-slate-500"
-        >
-          {showDeckComparison ? "Hide deck comparison" : "Compare decks"}
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setShowDeckComparison((v) => !v)}
+            className="text-[11px] rounded-full border border-slate-700 bg-slate-900/80 px-2 py-1 text-slate-300 hover:border-slate-500"
+          >
+            {showDeckComparison ? "Hide deck comparison" : "Compare decks"}
+          </button>
+          <input
+            value={deckQuery}
+            onChange={(event) => setDeckQuery(event.target.value)}
+            placeholder="Filter decks by name, style, or tag"
+            className="text-[11px] w-full max-w-xs rounded-full border border-slate-800 bg-slate-900/80 px-3 py-1 text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+          />
+        </div>
       ) : null}
 
       <div className="space-y-3">
-        {parts.map((part) => (
+        {visibleParts.map((part) => (
           <PartCard
             key={part.id}
             part={part as BuildPart}
@@ -253,9 +303,36 @@ function CategoryPartList({
         ))}
       </div>
 
+      {category === "deck" && hasMoreDeckCards ? (
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={() => setVisibleDeckCount((count) => count + 24)}
+            className="text-xs rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-100"
+          >
+            Load more decks
+          </button>
+        </div>
+      ) : null}
+
       {category === "deck" && showDeckComparison ? (
-        <div className="mt-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-3 overflow-x-auto">
-          <ComparisonTable items={catalog.decks} columns={deckComparisonColumns} highlightedId={build.selectedDeck?.id} />
+        <div className="mt-3 space-y-2 rounded-2xl border border-slate-800 bg-slate-950/60 p-3 overflow-x-auto">
+          <ComparisonTable
+            items={comparisonDecks}
+            columns={deckComparisonColumns}
+            highlightedId={build.selectedDeck?.id}
+          />
+          {hasMoreComparisonRows ? (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => setVisibleComparisonCount((count) => count + 40)}
+                className="text-xs rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-100"
+              >
+                Load more rows
+              </button>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
