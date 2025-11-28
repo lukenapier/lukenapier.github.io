@@ -1,44 +1,35 @@
 [
   {
-    "id": "esc-dual-10s",
-    "name": "Dual Touring ESC (8S/10S)",
-    "category": "esc",
-    "supportedVoltageClasses": ["8S", "10S"],
-    "maxContinuousCurrentA": 60,
-    "motorCount": "dual",
-    "connectors": ["MR60", "sensor"],
-    "hasBluetooth": true,
-    "hasTelemetry": true,
-    "waterproofRating": "IP65",
-    "notes": "Great for 2WD commuter setups with app tuning.",
-    "tags": ["commuter", "beginner"]
-  },
-  {
-    "id": "esc-performance-12s",
-    "name": "Performance ESC 12S",
+    "id": "esc-flipsky-dual-6.6-plus",
+    "brand": "Flipsky",
+    "name": "FSESC 6.6 Dual Plus",
     "category": "esc",
     "supportedVoltageClasses": ["10S", "12S"],
-    "maxContinuousCurrentA": 80,
+    "maxContinuousCurrentA": 60,
     "motorCount": "dual",
-    "connectors": ["QS8", "sensor"],
-    "hasBluetooth": true,
     "hasTelemetry": true,
-    "waterproofRating": "IP67",
-    "notes": "Designed for high-voltage builds with active cooling path.",
-    "tags": ["speed", "performance"]
+    "notes": "Dual VESC-based controller with Bluetooth and CAN for high-power builds."
   },
   {
-    "id": "esc-urban-8s",
-    "name": "Compact ESC 6S/8S",
+    "id": "esc-makerx-dv6",
+    "brand": "MakerX",
+    "name": "DV6",
     "category": "esc",
-    "supportedVoltageClasses": ["6S", "8S"],
-    "maxContinuousCurrentA": 50,
-    "motorCount": "single",
-    "connectors": ["XT60"],
-    "hasBluetooth": false,
+    "supportedVoltageClasses": ["10S", "12S"],
+    "maxContinuousCurrentA": 60,
+    "motorCount": "dual",
+    "hasTelemetry": true,
+    "notes": "Compact dual VESC with aluminum shell and strong braking."
+  },
+  {
+    "id": "esc-hobbywing-v4-dual",
+    "brand": "Hobbywing",
+    "name": "V4 Dual ESC",
+    "category": "esc",
+    "supportedVoltageClasses": ["10S"],
+    "maxContinuousCurrentA": 40,
+    "motorCount": "dual",
     "hasTelemetry": false,
-    "waterproofRating": "IP54",
-    "notes": "Efficient controller for lightweight boards and travel builds.",
-    "tags": ["commuter", "budget", "travel"]
+    "notes": "Smooth, quiet control stack widely shipped on commuter prebuilts."
   }
 ]

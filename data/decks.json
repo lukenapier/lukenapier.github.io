@@ -1,54 +1,42 @@
 [
   {
-    "id": "deck-commuter-38",
-    "name": "38\" Commuter Top-Mount",
+    "id": "deck-loaded-vanguard-flex2",
+    "brand": "Loaded Boards",
+    "name": "Vanguard Flex 2",
     "category": "deck",
-    "lengthCm": 97,
-    "wheelbaseCm": 70,
-    "widthCm": 23.5,
-    "flex": "medium",
-    "mountStyle": "top-mount",
-    "deckStyle": "commuter",
-    "notes": "Stable carving deck with mellow concave and foot-stop friendly nose.",
-    "tags": ["commuter", "beginner", "carve"]
-  },
-  {
-    "id": "deck-drop-40",
-    "name": "40\" Drop-Through Cruiser",
-    "category": "deck",
-    "lengthCm": 102,
-    "wheelbaseCm": 75,
-    "widthCm": 24,
+    "lengthCm": 96.5,
+    "style": "carver",
     "flex": "flexy",
-    "mountStyle": "drop-through",
-    "deckStyle": "cruiser",
-    "notes": "Lower ride height for push-friendly commuting and smooth carving.",
-    "tags": ["commuter", "comfort", "beginner"]
+    "notes": "Bamboo and fiberglass drop-through with lively flex for carving and commuting."
   },
   {
-    "id": "deck-downhill-37",
-    "name": "37\" Downhill Stiff",
+    "id": "deck-landyachtz-evo-40",
+    "brand": "Landyachtz",
+    "name": "Evo 40",
     "category": "deck",
-    "lengthCm": 94,
-    "wheelbaseCm": 68,
-    "widthCm": 23,
+    "lengthCm": 101.6,
+    "style": "downhill",
     "flex": "stiff",
-    "mountStyle": "top-mount",
-    "deckStyle": "downhill",
-    "notes": "Locked-in stance with micro-drop pockets for high-speed stability.",
-    "tags": ["speed", "downhill"]
+    "notes": "Micro-drop speedboard known for stability at high speeds and loaded builds."
   },
   {
-    "id": "deck-dropdeck-39",
-    "name": "39\" Drop-Deck Carver",
+    "id": "deck-evolve-bamboo-gtr",
+    "brand": "Evolve",
+    "name": "Bamboo GTR Deck",
     "category": "deck",
-    "lengthCm": 99,
-    "wheelbaseCm": 72,
-    "widthCm": 23.5,
+    "lengthCm": 96,
+    "style": "commuter",
     "flex": "medium",
-    "mountStyle": "drop-deck",
-    "deckStyle": "carver",
-    "notes": "Sunken platform with rocker for locked-in commuting and carving.",
-    "tags": ["commuter", "comfort", "carve"]
+    "notes": "Classic bamboo flex deck with comfortable concave for all-day cruising."
+  },
+  {
+    "id": "deck-rayne-anthem-38",
+    "brand": "Rayne",
+    "name": "Anthem 38",
+    "category": "deck",
+    "lengthCm": 96.5,
+    "style": "freeride",
+    "flex": "stiff",
+    "notes": "Vert-lam construction with mild rocker and pockets for a locked-in electric setup."
   }
 ]

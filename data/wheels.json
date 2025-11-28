@@ -1,54 +1,42 @@
 [
   {
-    "id": "wheels-street-90",
-    "name": "90mm Street Grip",
+    "id": "wheel-orangatang-caguama-85-83a",
+    "brand": "Orangatang",
+    "name": "Caguama 85mm 83a",
     "category": "wheels",
-    "diameterMm": 90,
-    "hardnessA": 78,
-    "contactPatchMm": 56,
-    "widthMm": 52,
-    "wheelType": "street",
-    "lipShape": "square",
-    "notes": "Grippy urethane for smooth pavement.",
-    "tags": ["commuter", "carve"]
+    "diameterMm": 85,
+    "durometerA": 83,
+    "type": "street",
+    "notes": "Happy Thane formula with wide contact patch for plush commuting."
   },
   {
-    "id": "wheels-street-97",
-    "name": "97mm Comfort Roll",
+    "id": "wheel-abec11-superfly-107-74a",
+    "brand": "ABEC 11",
+    "name": "SuperFly 107mm 74a",
     "category": "wheels",
-    "diameterMm": 97,
-    "hardnessA": 76,
-    "contactPatchMm": 60,
-    "widthMm": 55,
-    "wheelType": "street",
-    "lipShape": "rounded",
-    "notes": "Extra damping for rougher bike paths.",
-    "tags": ["commuter", "comfort"]
+    "diameterMm": 107,
+    "durometerA": 74,
+    "type": "street",
+    "notes": "Giant urethane wheel that smooths rough pavement and boosts top speed."
   },
   {
-    "id": "wheels-at-105",
-    "name": "105mm Cloud Hybrid",
+    "id": "wheel-cloudwheel-discovery-105-78a",
+    "brand": "IWONDER",
+    "name": "Cloudwheel Discovery 105mm 78a",
     "category": "wheels",
     "diameterMm": 105,
-    "hardnessA": 78,
-    "contactPatchMm": 62,
-    "widthMm": 60,
-    "wheelType": "all-terrain",
-    "lipShape": "rounded",
-    "notes": "Soft foam core street/AT hybrid for pothole-heavy routes.",
-    "tags": ["comfort", "commuter", "off-road"]
+    "durometerA": 78,
+    "type": "all-terrain",
+    "notes": "Vapor-core airless design that softens cracks without full pneumatics."
   },
   {
-    "id": "wheels-at-110",
-    "name": "110mm All-Terrain",
+    "id": "wheel-evolve-gt-97-76a",
+    "brand": "Evolve",
+    "name": "GT 97mm 76a",
     "category": "wheels",
-    "diameterMm": 110,
-    "hardnessA": 74,
-    "contactPatchMm": 64,
-    "widthMm": 65,
-    "wheelType": "all-terrain",
-    "lipShape": "rounded",
-    "notes": "Tall profile for mixed pavement and packed dirt.",
-    "tags": ["off-road", "adventure"]
+    "diameterMm": 97,
+    "durometerA": 76,
+    "type": "street",
+    "notes": "Stone-ground urethane tuned for Evolve belt drive boards and long ranges."
   }
 ]

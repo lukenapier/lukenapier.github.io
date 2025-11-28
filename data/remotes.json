@@ -1,41 +1,20 @@
 [
   {
-    "id": "remote-simple",
-    "name": "Simple Trigger Remote",
+    "id": "remote-hoyt-puck",
+    "brand": "Hoyt St",
+    "name": "Puck",
     "category": "remote",
-    "frequency": "2.4GHz",
-    "compatibleEscFamilies": ["VESC-style", "Hobby dual"],
-    "triggerStyle": "trigger",
+    "escFamilies": ["VESC"],
     "hasTelemetry": false,
-    "ridingModes": 2,
-    "waterproofRating": "IP54",
-    "notes": "Basic throttle with cruise toggle.",
-    "tags": ["beginner", "budget"]
+    "notes": "Trigger-style remote with latching power and swappable shells."
   },
   {
-    "id": "remote-telemetry",
-    "name": "Telemetry GT Remote",
+    "id": "remote-flipsky-vx3",
+    "brand": "Flipsky",
+    "name": "VX3",
     "category": "remote",
-    "frequency": "2.4GHz",
-    "compatibleEscFamilies": ["VESC-style"],
-    "triggerStyle": "trigger",
+    "escFamilies": ["VESC"],
     "hasTelemetry": true,
-    "ridingModes": 4,
-    "waterproofRating": "IP55",
-    "notes": "Displays speed and battery status with haptic alerts.",
-    "tags": ["performance", "speed"]
-  },
-  {
-    "id": "remote-compact",
-    "name": "Compact Thumbwheel",
-    "category": "remote",
-    "frequency": "2.4GHz",
-    "compatibleEscFamilies": ["Light ESC"],
-    "triggerStyle": "thumbwheel",
-    "hasTelemetry": false,
-    "ridingModes": 2,
-    "waterproofRating": "IPX4",
-    "notes": "Pocketable remote for travel boards.",
-    "tags": ["travel", "commuter"]
+    "notes": "2.4GHz remote with screen telemetry and cruise control support."
   }
 ]
