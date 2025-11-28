@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { ComparisonTable, type ComparisonColumn } from "./components/ComparisonTable";
 import { useCatalog } from "./hooks/useCatalog";
@@ -275,10 +275,12 @@ function DeckSelectorCard({
   deck,
   isSelected,
   onSelect,
+  onCompareClick,
 }: {
   deck: Deck;
   isSelected: boolean;
   onSelect: () => void;
+  onCompareClick?: () => void;
 }) {
   const wheelbase = formatWheelbase(deck);
   const weightLabel =
@@ -341,11 +343,17 @@ function DeckSelectorCard({
           )}
         </span>
         <span
-          className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${
-            isSelected ? "bg-emerald-500/20 text-emerald-200" : "bg-slate-800 text-slate-200"
+          onClick={(e) => {
+            e.stopPropagation();
+            onCompareClick?.();
+          }}
+          className={`cursor-pointer rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+            isSelected
+              ? "bg-emerald-500/20 text-emerald-200"
+              : "bg-slate-800 text-slate-200 hover:bg-slate-800/80"
           }`}
         >
-          {isSelected ? "Selected" : "Tap to compare"}
+          {isSelected ? "Selected · View comparison" : "Tap to compare"}
         </span>
       </div>
     </button>
@@ -361,6 +369,7 @@ export default function HomePage() {
   const catalog = useCatalog();
   const [build, setBuild] = useState<BuildState>({});
   const [showDeckComparison, setShowDeckComparison] = useState(false);
+  const deckComparisonRef = useRef<HTMLDivElement | null>(null);
 
   const validations = useMemo(() => evaluateBuild(build), [build]);
 
@@ -666,12 +675,30 @@ export default function HomePage() {
                     deck={deck}
                     onSelect={() => handleDeckSelect(deck)}
                     isSelected={build.selectedDeck?.id === deck.id}
+                    onCompareClick={() => {
+                      if (build.selectedDeck?.id !== deck.id) {
+                        handleDeckSelect(deck);
+                      }
+
+                      setShowDeckComparison(true);
+
+                      if (typeof window !== "undefined") {
+                        requestAnimationFrame(() => {
+                          deckComparisonRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                        });
+                      }
+                    }}
                   />
                 ))}
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-                <p className="text-[12px] text-slate-300">Compare specs and pricing across decks.</p>
+                <p className="text-[12px] text-slate-300">
+                  Tap "Tap to compare" on any deck, or use "Compare decks" to view the full table.
+                </p>
                 <button
                   className="text-[12px] rounded-lg border border-emerald-500/60 px-3 py-1 font-semibold text-emerald-200 hover:bg-emerald-500/10"
                   onClick={() => setShowDeckComparison((prev) => !prev)}
@@ -681,7 +708,10 @@ export default function HomePage() {
               </div>
 
               {showDeckComparison ? (
-                <div className="mt-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-3">
+                <div
+                  ref={deckComparisonRef}
+                  className="mt-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-3"
+                >
                   <ComparisonTable
                     items={catalog.decks}
                     columns={deckComparisonColumns}
