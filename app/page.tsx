@@ -40,7 +40,19 @@ function formatPrice(value?: number, currency = "USD") {
 }
 
 function getPrimaryOffer(part?: BuildPart): Offer | undefined {
-  return part?.offers?.[0];
+  if (!part || part.category === "deck") return undefined;
+  if ("offers" in part) return part.offers?.[0];
+  return undefined;
+}
+
+function getPriceInfo(part?: BuildPart): PriceInfo {
+  if (!part) return {};
+  if (part.category === "deck") {
+    return { value: part.priceValue, currency: part.priceCurrency };
+  }
+
+  const offer = getPrimaryOffer(part);
+  return { value: offer?.priceUsd, currency: offer ? "USD" : undefined };
 }
 
 function getPriceInfo(part?: BuildPart): PriceInfo {
