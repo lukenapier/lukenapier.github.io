@@ -8,6 +8,7 @@ export type ComparisonColumn<T> = {
   sortable?: boolean;
   getSortValue?: (item: T) => string | number | undefined;
   render: (item: T) => React.ReactNode;
+  align?: "left" | "center" | "right";
 };
 
 export type ComparisonTableProps<T extends { id: string }> = {
@@ -78,14 +79,16 @@ export function ComparisonTable<T extends { id: string }>({
   };
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/70">
+    <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/70 shadow-lg shadow-emerald-900/10">
       <table className="min-w-full text-left text-sm">
-        <thead className="bg-slate-900/60 text-[11px] uppercase tracking-wide text-slate-400">
+        <thead className="sticky top-0 z-10 bg-slate-900/70 text-[11px] uppercase tracking-wide text-slate-400 backdrop-blur">
           <tr>
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`px-4 py-3 font-semibold ${col.sortable ? "cursor-pointer select-none" : ""}`}
+                className={`px-4 py-3 font-semibold ${
+                  col.sortable ? "cursor-pointer select-none transition hover:text-emerald-200" : ""
+                } ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
                 onClick={() => (col.sortable ? handleSort(col.key) : undefined)}
               >
                 <div className="flex items-center gap-1">
@@ -101,22 +104,36 @@ export function ComparisonTable<T extends { id: string }>({
           </tr>
         </thead>
         <tbody>
-          {sortedItems.map((item) => (
-            <tr
-              key={item.id}
-              className={`border-t border-slate-800 text-slate-200 ${
-                highlightedId === item.id
-                  ? "bg-emerald-500/5"
-                  : "hover:bg-slate-900/50"
-              }`}
-            >
-              {columns.map((col) => (
-                <td key={col.key} className="px-4 py-3">
-                  {col.render(item)}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {sortedItems.map((item, index) => {
+            const isHighlighted = highlightedId === item.id;
+            const zebra = index % 2 === 0 ? "bg-slate-950/40" : "bg-slate-900/40";
+
+            return (
+              <tr
+                key={item.id}
+                className={`border-t border-slate-800 text-slate-200 transition ${zebra} ${
+                  isHighlighted
+                    ? "relative isolate bg-emerald-500/5 ring-1 ring-emerald-400/60"
+                    : "hover:bg-slate-900/70"
+                }`}
+              >
+                {columns.map((col) => (
+                  <td
+                    key={col.key}
+                    className={`px-4 py-3 align-middle ${
+                      col.align === "right"
+                        ? "text-right"
+                        : col.align === "center"
+                          ? "text-center"
+                          : "text-left"
+                    }`}
+                  >
+                    {col.render(item)}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

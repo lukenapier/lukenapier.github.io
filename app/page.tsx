@@ -27,13 +27,30 @@ function formatDisplayName(part: BuildPart) {
   return `${part.brand} ${part.name}`;
 }
 
-function formatPrice(value?: number) {
+type PriceInfo = { value?: number; currency?: string };
+
+function formatPrice(value?: number, currency = "USD") {
   if (value === undefined) return undefined;
-  return `$${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+  }).format(value);
 }
 
 function getPrimaryOffer(part?: BuildPart): Offer | undefined {
   return part?.offers?.[0];
+}
+
+function getPriceInfo(part?: BuildPart): PriceInfo {
+  if (!part) return {};
+  if (part.category === "deck") {
+    return { value: part.priceValue, currency: part.priceCurrency };
+  }
+
+  const offer = getPrimaryOffer(part);
+  return { value: offer?.priceUsd, currency: offer ? "USD" : undefined };
 }
 
 function formatNameWithPrice(part?: BuildPart) {
@@ -43,16 +60,24 @@ function formatNameWithPrice(part?: BuildPart) {
 }
 
 function getFlexLabel(deck: Deck) {
-  if (deck.flexRating !== undefined) return `Flex ${deck.flexRating}`;
-  return deck.flex ? `${capitalize(deck.flex)} flex` : undefined;
+  if (deck.flex !== undefined) return `Flex ${deck.flex}`;
+  return undefined;
+}
+
+function formatWheelbase(deck: Deck) {
+  if (deck.wheelbaseMinCm && deck.wheelbaseMaxCm) {
+    return `${deck.wheelbaseMinCm.toFixed(1)}–${deck.wheelbaseMaxCm.toFixed(1)} cm`;
+  }
+  if (deck.wheelbaseMinCm) return `${deck.wheelbaseMinCm.toFixed(1)} cm`;
+  return undefined;
 }
 
 function formatDeckSummary(deck: Deck) {
   const flexLabel = getFlexLabel(deck);
   return [
-    `${deck.lengthCm}cm`,
-    deck.widthCm ? `${deck.widthCm}cm wide` : undefined,
-    capitalize(deck.style),
+    `${deck.lengthCm} cm`,
+    deck.widthCm ? `${deck.widthCm} cm wide` : undefined,
+    deck.style,
     flexLabel,
   ]
     .filter(Boolean)
@@ -109,7 +134,8 @@ function formatRemoteSummary(remote: Remote) {
 }
 
 function getPriceValue(part?: BuildPart) {
-  return getPrimaryOffer(part)?.priceUsd;
+  const { value } = getPriceInfo(part);
+  return value;
 }
 
 function calculateEstimatedTotal(parts: BuildPart[]) {
@@ -117,8 +143,8 @@ function calculateEstimatedTotal(parts: BuildPart[]) {
 }
 
 function formatPriceDisplay(part?: BuildPart) {
-  const value = getPriceValue(part);
-  return formatPrice(value) ?? "N/A";
+  const { value, currency } = getPriceInfo(part);
+  return formatPrice(value, currency) ?? "N/A";
 }
 
 function getKeySpec(item?: BuildPart) {
@@ -243,6 +269,87 @@ function SelectorCard({
   );
 }
 
+function DeckSelectorCard({
+  deck,
+  isSelected,
+  onSelect,
+}: {
+  deck: Deck;
+  isSelected: boolean;
+  onSelect: () => void;
+}) {
+  const wheelbase = formatWheelbase(deck);
+  const weightLabel =
+    deck.weightDeckOnlyLb !== undefined ? `~${deck.weightDeckOnlyLb.toFixed(1)} lb deck only` : undefined;
+  const flexLabel = getFlexLabel(deck);
+  const price = formatPrice(deck.priceValue, deck.priceCurrency);
+  const specLine = [
+    `${deck.lengthCm.toFixed(0)} cm`,
+    deck.style,
+    flexLabel,
+    deck.widthCm ? `${deck.widthCm.toFixed(1)} cm wide` : undefined,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  return (
+    <button
+      onClick={onSelect}
+      className={`w-full rounded-2xl border p-4 text-left transition shadow-sm ${
+        isSelected
+          ? "border-emerald-400/70 bg-emerald-500/5 shadow-emerald-500/10"
+          : "border-slate-800 bg-slate-950/60 hover:border-emerald-400/50 hover:bg-slate-900/60"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1">
+          <p className="text-sm font-semibold uppercase tracking-wide text-emerald-200">{deck.brand}</p>
+          <p className="text-base font-semibold text-white leading-5">{deck.name}</p>
+          <p className="text-[12px] text-slate-200">{specLine}</p>
+        </div>
+        <div className="text-right text-sm font-semibold text-emerald-200">
+          {price ?? "Price N/A"}
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-200">
+        {deck.tags?.map((tag) => (
+          <span key={tag} className="rounded-full bg-slate-800/80 px-2 py-1 text-[11px] uppercase tracking-wide">
+            {tag}
+          </span>
+        ))}
+        {wheelbase ? <span className="rounded-full bg-slate-800/80 px-2 py-1">Wheelbase: {wheelbase}</span> : null}
+        {weightLabel ? <span className="rounded-full bg-slate-800/80 px-2 py-1">{weightLabel}</span> : null}
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[12px] text-slate-300">
+        <span className="flex items-center gap-1">
+          <span className="font-semibold text-white">{price ?? "N/A"}</span>
+          <span className="text-slate-400">·</span>
+          {deck.productUrl ? (
+            <a
+              href={deck.productUrl}
+              target="_blank"
+              className="text-emerald-200 underline-offset-2 hover:text-emerald-100 hover:underline"
+            >
+              {deck.vendorName}
+            </a>
+          ) : (
+            deck.vendorName
+          )}
+        </span>
+        <span
+          className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+            isSelected ? "bg-emerald-500/20 text-emerald-200" : "bg-slate-800 text-slate-200"
+          }`}
+        >
+          {isSelected ? "Selected" : "Tap to compare"}
+        </span>
+      </div>
+    </button>
+  );
+}
+
 function formatBoardName(deck?: Deck) {
   if (!deck) return "Custom Electric Longboard";
   return `${deck.name} Build`;
@@ -291,12 +398,18 @@ export default function HomePage() {
       .map(([tag]) => tag);
   }, [selectedParts]);
 
+  const flexSortValue = (deck: Deck) => {
+    if (deck.flex === undefined) return undefined;
+    const numeric = Number(deck.flex);
+    return Number.isNaN(numeric) ? undefined : numeric;
+  };
+
   const deckComparisonColumns = useMemo<ComparisonColumn<Deck>[]>(
     () => [
       {
         key: "brand",
         label: "Brand",
-        render: (deck) => deck.brand,
+        render: (deck) => <span className="font-semibold text-slate-100">{deck.brand}</span>,
       },
       {
         key: "name",
@@ -307,27 +420,44 @@ export default function HomePage() {
         key: "length",
         label: "Length (cm)",
         sortable: true,
+        align: "right",
         getSortValue: (deck) => deck.lengthCm,
         render: (deck) => `${deck.lengthCm.toFixed(1)}`,
       },
       {
         key: "style",
         label: "Style",
-        render: (deck) => capitalize(deck.style),
+        render: (deck) => deck.style,
       },
       {
         key: "flex",
         label: "Flex",
         sortable: true,
-        getSortValue: (deck) => deck.flexRating ?? deck.flex ?? "",
-        render: (deck) => getFlexLabel(deck) ?? "N/A",
+        align: "center",
+        getSortValue: flexSortValue,
+        render: (deck) => getFlexLabel(deck) ?? "—",
+      },
+      {
+        key: "wheelbase",
+        label: "Wheelbase",
+        render: (deck) => formatWheelbase(deck) ?? "—",
+      },
+      {
+        key: "weight",
+        label: "Weight",
+        align: "center",
+        render: (deck) =>
+          deck.weightDeckOnlyLb !== undefined
+            ? `${deck.weightDeckOnlyLb.toFixed(1)} lb`
+            : "—",
       },
       {
         key: "price",
-        label: "Price (USD)",
+        label: "Price",
         sortable: true,
+        align: "right",
         getSortValue: (deck) => getPriceValue(deck),
-        render: (deck) => formatPrice(getPriceValue(deck)) ?? "N/A",
+        render: (deck) => formatPriceDisplay(deck),
       },
     ],
     [],
@@ -347,6 +477,23 @@ export default function HomePage() {
     setBuild((prev) => ({ ...prev, selectedRemote: remote }));
 
   const renderVendor = (part?: BuildPart) => {
+    if (!part) return "N/A";
+
+    if (part.category === "deck") {
+      if (!part.vendorName) return "N/A";
+      return part.productUrl ? (
+        <a
+          href={part.productUrl}
+          target="_blank"
+          className="text-emerald-200 underline-offset-2 hover:underline"
+        >
+          {part.vendorName}
+        </a>
+      ) : (
+        part.vendorName
+      );
+    }
+
     const offer = getPrimaryOffer(part);
     if (!offer?.vendorName) return "N/A";
     return offer.productUrl ? (
@@ -404,6 +551,61 @@ export default function HomePage() {
     },
   ];
 
+  const overviewEntries: Array<{
+    label: string;
+    title: string;
+    summary: string;
+    detail?: string;
+  }> = [
+    {
+      label: "Deck",
+      title: formatNameWithPrice(build.selectedDeck),
+      summary: build.selectedDeck ? formatDeckSummary(build.selectedDeck) : "Select a deck to view specs",
+      detail: build.selectedDeck
+        ? [
+            formatWheelbase(build.selectedDeck)
+              ? `Wheelbase: ${formatWheelbase(build.selectedDeck)}`
+              : undefined,
+            build.selectedDeck.weightDeckOnlyLb
+              ? `~${build.selectedDeck.weightDeckOnlyLb.toFixed(1)} lb deck only`
+              : undefined,
+          ]
+            .filter(Boolean)
+            .join(" · ") || undefined
+        : undefined,
+    },
+    {
+      label: "Trucks",
+      title: formatNameWithPrice(build.selectedTrucks),
+      summary: build.selectedTrucks ? formatTrucksSummary(build.selectedTrucks) : "Choose trucks to see stance",
+    },
+    {
+      label: "Wheels",
+      title: formatNameWithPrice(build.selectedWheels),
+      summary: build.selectedWheels ? formatWheelsSummary(build.selectedWheels) : "Pick wheels to compare diameter",
+    },
+    {
+      label: "Battery",
+      title: formatNameWithPrice(build.selectedBattery),
+      summary: build.selectedBattery ? formatBatterySummary(build.selectedBattery) : "Select a pack to see Wh and cells",
+    },
+    {
+      label: "ESC",
+      title: formatNameWithPrice(build.selectedEsc),
+      summary: build.selectedEsc ? formatEscSummary(build.selectedEsc) : "Add an ESC to check voltage support",
+    },
+    {
+      label: "Drive Kit",
+      title: formatNameWithPrice(build.selectedDriveKit),
+      summary: build.selectedDriveKit ? formatDriveKitSummary(build.selectedDriveKit) : "Pick a drive kit to view KV and type",
+    },
+    {
+      label: "Remote",
+      title: formatNameWithPrice(build.selectedRemote),
+      summary: build.selectedRemote ? formatRemoteSummary(build.selectedRemote) : "Choose a remote to see controls",
+    },
+  ];
+
   return (
     <main className="min-h-screen flex flex-col bg-slate-950 text-white">
       <header className="border-b border-slate-800 px-6 py-4 flex items-center justify-between">
@@ -419,7 +621,7 @@ export default function HomePage() {
 
         <nav className="flex items-center gap-4 text-sm text-slate-300">
           <span className="rounded-full bg-slate-900 px-3 py-1 text-[11px] text-emerald-200 border border-slate-800">
-            Longboard Phase 2
+            BoardBuilder v0.2.0
           </span>
         </nav>
       </header>
@@ -455,30 +657,19 @@ export default function HomePage() {
                   Remove deck
                 </button>
               ) : null}
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {catalog.decks.map((deck) => (
-                  <SelectorCard
+                  <DeckSelectorCard
                     key={deck.id}
-                    title={formatDisplayName(deck)}
-                    description={deck.notes}
-                    meta={
-                      [
-                        `${deck.lengthCm}cm`,
-                        deck.widthCm ? `${deck.widthCm}cm wide` : undefined,
-                        capitalize(deck.style),
-                        getFlexLabel(deck),
-                      ].filter(Boolean) as string[]
-                    }
+                    deck={deck}
                     onSelect={() => handleDeckSelect(deck)}
                     isSelected={build.selectedDeck?.id === deck.id}
-                    badge="Deck"
-                    offer={getPrimaryOffer(deck)}
                   />
                 ))}
               </div>
 
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[12px] text-slate-400">Compare specs and pricing across decks.</p>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                <p className="text-[12px] text-slate-300">Compare specs and pricing across decks.</p>
                 <button
                   className="text-[12px] rounded-lg border border-emerald-500/60 px-3 py-1 font-semibold text-emerald-200 hover:bg-emerald-500/10"
                   onClick={() => setShowDeckComparison((prev) => !prev)}
@@ -488,7 +679,7 @@ export default function HomePage() {
               </div>
 
               {showDeckComparison ? (
-                <div className="mt-3">
+                <div className="mt-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-3">
                   <ComparisonTable
                     items={catalog.decks}
                     columns={deckComparisonColumns}
@@ -738,86 +929,57 @@ export default function HomePage() {
             2. Build Overview
           </h2>
 
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4 shadow-inner">
-            <p className="text-lg font-semibold text-white">{formatBoardName(build.selectedDeck)}</p>
-            <p className="text-xs text-slate-400 mt-1">
-              Snapshot of your electric longboard configuration.
-            </p>
-
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-200">
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Deck</p>
-                <p>{formatNameWithPrice(build.selectedDeck)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedDeck ? formatDeckSummary(build.selectedDeck) : "Select a deck to view specs"}
-                </p>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 shadow-inner space-y-4">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-slate-400">Current Build</p>
+                <p className="text-lg font-semibold text-white leading-tight">{formatBoardName(build.selectedDeck)}</p>
+                <p className="text-xs text-slate-400">A quick snapshot of your setup, kept in sync as you select parts.</p>
               </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Trucks</p>
-                <p>{formatNameWithPrice(build.selectedTrucks)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedTrucks
-                    ? formatTrucksSummary(build.selectedTrucks)
-                    : "Choose trucks to see stance"}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Wheels</p>
-                <p>{formatNameWithPrice(build.selectedWheels)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedWheels
-                    ? formatWheelsSummary(build.selectedWheels)
-                    : "Pick wheels to compare diameter and duro"}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Battery</p>
-                <p>{formatNameWithPrice(build.selectedBattery)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedBattery
-                    ? formatBatterySummary(build.selectedBattery)
-                    : "Select a pack to see Wh and cells"}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">ESC</p>
-                <p>{formatNameWithPrice(build.selectedEsc)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedEsc ? formatEscSummary(build.selectedEsc) : "Add an ESC to check voltage support"}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Drive Kit</p>
-                <p>{formatNameWithPrice(build.selectedDriveKit)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedDriveKit
-                    ? formatDriveKitSummary(build.selectedDriveKit)
-                    : "Pick a drive kit to view KV and type"}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs uppercase text-slate-400">Remote</p>
-                <p>{formatNameWithPrice(build.selectedRemote)}</p>
-                <p className="text-[11px] text-slate-400">
-                  {build.selectedRemote ? formatRemoteSummary(build.selectedRemote) : "Choose a remote to see controls"}
-                </p>
-              </div>
+              {build.selectedDeck ? (
+                <span className="mt-1 inline-flex items-center rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-200">
+                  Deck locked in
+                </span>
+              ) : null}
             </div>
 
-            <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/60 p-4">
-              <p className="text-[11px] uppercase tracking-wide text-slate-400">Estimated build cost</p>
-              <p className="text-2xl font-bold text-emerald-200 mt-1">
-                {formatPrice(estimatedTotal) ?? "$0"}
-              </p>
-              <p className="text-xs text-slate-400">Summed from selected parts.</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {overviewEntries.map((entry) => (
+                <div
+                  key={entry.label}
+                  className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 shadow-sm"
+                >
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400">{entry.label}</p>
+                  <p className="text-sm font-semibold text-white leading-tight">{entry.title}</p>
+                  <p className="text-[12px] text-slate-300 mt-1">{entry.summary}</p>
+                  {entry.detail ? <p className="text-[11px] text-slate-400 mt-1">{entry.detail}</p> : null}
+                </div>
+              ))}
             </div>
 
-            {sharedIntentTags?.length ? (
-              <div className="mt-4 rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-3 text-sm text-emerald-100">
-                <p className="text-[11px] uppercase tracking-wide text-emerald-300">Build intent</p>
-                <p className="font-semibold">This build leans toward: {sharedIntentTags.map(capitalize).join(" / ")}</p>
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-4">
+                <p className="text-[11px] uppercase tracking-wide text-slate-400">Estimated build cost</p>
+                <p className="text-2xl font-bold text-emerald-200 mt-1">
+                  {formatPrice(estimatedTotal) ?? "$0"}
+                </p>
+                <p className="text-xs text-slate-400">Updated from all selected parts.</p>
               </div>
-            ) : null}
+
+              {sharedIntentTags?.length ? (
+                <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-4 text-sm text-emerald-100">
+                  <p className="text-[11px] uppercase tracking-wide text-emerald-300">Build intent</p>
+                  <p className="font-semibold">
+                    This build leans toward: {sharedIntentTags.map(capitalize).join(" / ")}
+                  </p>
+                </div>
+              ) : (
+                <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400">Build intent</p>
+                  <p className="text-xs text-slate-400">Add more parts to reveal the common riding style.</p>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="rounded-xl border border-dashed border-slate-700 bg-slate-900/40 p-4 space-y-2">
@@ -894,7 +1056,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-slate-800 px-6 py-3 text-xs text-slate-500 flex items-center justify-between">
-        <span>BoardBuilder · Electric longboard prototype</span>
+        <span>BoardBuilder v0.2.0 · Electric longboard prototype</span>
         <span>Next step: expand metrics and compatibility rules.</span>
       </footer>
     </main>
