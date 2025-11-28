@@ -55,16 +55,6 @@ function getPriceInfo(part?: BuildPart): PriceInfo {
   return { value: offer?.priceUsd, currency: offer ? "USD" : undefined };
 }
 
-function getPriceInfo(part?: BuildPart): PriceInfo {
-  if (!part) return {};
-  if (part.category === "deck") {
-    return { value: part.priceValue, currency: part.priceCurrency };
-  }
-
-  const offer = getPrimaryOffer(part);
-  return { value: offer?.priceUsd, currency: offer ? "USD" : undefined };
-}
-
 function formatNameWithPrice(part?: BuildPart) {
   if (!part) return "Not selected";
   const price = formatPriceDisplay(part);
