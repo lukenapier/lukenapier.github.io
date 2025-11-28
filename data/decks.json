@@ -1,102 +1,59 @@
 [
   {
-    "id": "deck-loaded-vanguard-38-flex4",
+    "id": "loaded_tesseract_ii",
     "brand": "Loaded",
-    "name": "Vanguard 38\" Flex 4",
-    "category": "deck",
-    "lengthCm": 96.5,
-    "widthCm": 21.6,
-    "style": "top-mount",
-    "flex": "flexy",
-    "flexRating": 4,
-    "tags": ["carving", "commuter", "premium"],
-    "notes": "Bamboo and fiberglass classic with lively flex for carving-focused builds.",
-    "offers": [
-      {
-        "vendorName": "Loaded Boards",
-        "productUrl": "https://www.loadedboards.com/products/vanguard-longboard-skateboard",
-        "priceUsd": 249
-      }
-    ]
+    "name": "Tesseract II | Longboard Deck",
+    "style": "micro-drop",
+    "lengthCm": 100.0,
+    "widthCm": 24.4,
+    "wheelbaseMinCm": 57.2,
+    "wheelbaseMaxCm": 62.2,
+    "flex": 2,
+    "weightDeckOnlyLb": 5.0,
+    "tags": ["commuter", "carving", "premium"],
+    "notes": "The Tesseract II is your portal to high-performance freestyle and freeride. Its micro-drop platform locks you in for an immersive connection, while symmetrical double kicks defy gravity, opening up a universe of possibilities. Built with six plies of long-grain maple and triaxial fiberglass, it's engineered for perfect stellar stiffness and explosive pop. Laser-cut 50-grit griptape and machined wheel wells keep you grounded, while the photochromic graphic hints at new dimensions in your skateboard progression.",
+    "vendorName": "Loaded Boards",
+    "productUrl": "https://www.loadedboards.com/products/tesseract-ii-longboard-deck",
+    "priceCurrency": "USD",
+    "priceValue": 222.0,
+    "lastVerifiedAt": "2025-11-27"
   },
   {
-    "id": "deck-landyachtz-evo-spectrum-40",
-    "brand": "Landyachtz",
-    "name": "Evo Spectrum 40\"",
-    "category": "deck",
-    "lengthCm": 99.0,
-    "widthCm": 24.9,
-    "style": "drop-down",
-    "flex": "stiff",
-    "flexRating": 1,
-    "tags": ["downhill", "freeride", "stable", "premium"],
-    "notes": "Micro-drop speedboard known for rock-solid stability under power.",
-    "offers": [
-      {
-        "vendorName": "Landyachtz / Longboarder Labs",
-        "productUrl": "https://www.longboarderlabs.com/product/landyachtz-evo-spectrum-9-8-x-39-black/",
-        "priceUsd": 199
-      }
-    ]
-  },
-  {
-    "id": "deck-sector9-fault-line-perch",
-    "brand": "Sector 9",
-    "name": "Fault Line Perch 39.5\"",
-    "category": "deck",
-    "lengthCm": 100.3,
-    "widthCm": 24.8,
-    "style": "drop-down",
-    "flex": "medium",
-    "flexRating": 3,
-    "tags": ["freeride", "commuter", "mid-range"],
-    "notes": "Comfortable drop-down platform for push-friendly freeride and electric commuters.",
-    "offers": [
-      {
-        "vendorName": "Sector 9 / Nord Boards",
-        "productUrl": "https://nordboards.com/products/sector-9-fault-line-perch-longboard-deck",
-        "priceUsd": 109
-      }
-    ]
-  },
-  {
-    "id": "deck-budget-drop-through-40",
-    "brand": "Budget",
-    "name": "40\" Drop-Through Maple Deck",
-    "category": "deck",
-    "lengthCm": 101.6,
+    "id": "loaded_ballona",
+    "brand": "Loaded",
+    "name": "Ballona | Longboard Deck",
+    "style": "rocker",
+    "lengthCm": 70.5,
     "widthCm": 22.9,
-    "style": "drop-through",
-    "flex": "medium",
-    "flexRating": 3,
-    "tags": ["budget", "beginner", "commuter"],
-    "notes": "Affordable 8-ply maple platform inspired by Atom/Minority style drop-through decks.",
-    "offers": [
-      {
-        "vendorName": "Generic / Amazon",
-        "productUrl": "https://www.amazon.com/Atom-Drop-Through-Longboard-Inch/dp/B06X3WQFFV",
-        "priceUsd": 69
-      }
-    ]
+    "wheelbaseMinCm": 37.5,
+    "wheelbaseMaxCm": 40.6,
+    "flex": 2,
+    "weightDeckOnlyLb": 2.6,
+    "tags": ["agile", "light"],
+    "notes": "Agile, compact, and light, the Loaded Ballona elevates the mini cruiser experience. Meticulously sculpted curvatures result in a unique mini “longboard” with tuned steering and responsive handling. Perfect for urban commuting, people slalom, driveway slashing, pump tracks, and skatepark flow. Small in stature, colossal in character.",
+    "vendorName": "Loaded Boards",
+    "productUrl": "https://www.loadedboards.com/products/ballona-longboard-deck",
+    "priceCurrency": "USD",
+    "priceValue": 86.0,
+    "lastVerifiedAt": "2025-11-27"
   },
   {
-    "id": "deck-madrid-trance-39",
-    "brand": "Madrid",
-    "name": "Trance Drop-Through 39\"",
-    "category": "deck",
-    "lengthCm": 99.1,
-    "widthCm": 24.1,
-    "style": "drop-through",
-    "flex": "medium",
-    "flexRating": 3,
-    "tags": ["commuter", "freeride", "mid-range"],
-    "notes": "Cambered maple drop-through with mild concave for relaxed cruising and light carving.",
-    "offers": [
-      {
-        "vendorName": "Madrid Skateboards",
-        "productUrl": "https://madridskateboards.com/collections/longboard-decks/products/trance-drop-through-longboard-deck",
-        "priceUsd": 139
-      }
-    ]
+    "id": "loaded_bolsa_ii",
+    "brand": "Loaded",
+    "name": "Bolsa II | Longboard Deck",
+    "style": "rocker",
+    "lengthCm": 86.4,
+    "widthCm": 23.9,
+    "wheelbaseMinCm": 40.6,
+    "wheelbaseMaxCm": 44.5,
+    "flex": 2,
+    "weightDeckOnlyLb": 3.8,
+    "tags": ["agile", "light"],
+    "notes": "The Bolsa II offers a balance of performance and versatility, featuring a refined shape designed to work with street, longboard, and surfskate setups across pumptracks, skateparks, and city streets. Its generous width, subtle rocker, and mellow concave provide a comfortable, controlled ride, while functional kicktails offer superior pop for ollies and trickery. Mellow wheel flares provide reference points for your feet along with ample wheel clearance, which is further enhanced by milled wheel wells.",
+    "vendorName": "Loaded Boards",
+    "productUrl": "https://www.loadedboards.com/products/bolsa-ii-longboard-deck",
+    "priceCurrency": "USD",
+    "priceValue": 119.0,
+    "lastVerifiedAt": "2025-11-27"
   }
 ]
