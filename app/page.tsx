@@ -697,7 +697,7 @@ export default function HomePage() {
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                 <p className="text-[12px] text-slate-300">
-                  Tap "Tap to compare" on any deck, or use "Compare decks" to view the full table.
+                  Tap &quot;Tap to compare&quot; on any deck, or use &quot;Compare decks&quot; to view the full table.
                 </p>
                 <button
                   className="text-[12px] rounded-lg border border-emerald-500/60 px-3 py-1 font-semibold text-emerald-200 hover:bg-emerald-500/10"
