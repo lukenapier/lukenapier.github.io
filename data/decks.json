@@ -1,42 +1,102 @@
 [
   {
-    "id": "deck-loaded-vanguard-flex2",
-    "brand": "Loaded Boards",
-    "name": "Vanguard Flex 2",
+    "id": "deck-loaded-vanguard-38-flex4",
+    "brand": "Loaded",
+    "name": "Vanguard 38\" Flex 4",
     "category": "deck",
     "lengthCm": 96.5,
-    "style": "carver",
+    "widthCm": 21.6,
+    "style": "top-mount",
     "flex": "flexy",
-    "notes": "Bamboo and fiberglass drop-through with lively flex for carving and commuting."
+    "flexRating": 4,
+    "tags": ["carving", "commuter", "premium"],
+    "notes": "Bamboo and fiberglass classic with lively flex for carving-focused builds.",
+    "offers": [
+      {
+        "vendorName": "Loaded Boards",
+        "productUrl": "https://www.loadedboards.com/products/vanguard-longboard-skateboard",
+        "priceUsd": 249
+      }
+    ]
   },
   {
-    "id": "deck-landyachtz-evo-40",
+    "id": "deck-landyachtz-evo-spectrum-40",
     "brand": "Landyachtz",
-    "name": "Evo 40",
+    "name": "Evo Spectrum 40\"",
+    "category": "deck",
+    "lengthCm": 99.0,
+    "widthCm": 24.9,
+    "style": "drop-down",
+    "flex": "stiff",
+    "flexRating": 1,
+    "tags": ["downhill", "freeride", "stable", "premium"],
+    "notes": "Micro-drop speedboard known for rock-solid stability under power.",
+    "offers": [
+      {
+        "vendorName": "Landyachtz / Longboarder Labs",
+        "productUrl": "https://www.longboarderlabs.com/product/landyachtz-evo-spectrum-9-8-x-39-black/",
+        "priceUsd": 199
+      }
+    ]
+  },
+  {
+    "id": "deck-sector9-fault-line-perch",
+    "brand": "Sector 9",
+    "name": "Fault Line Perch 39.5\"",
+    "category": "deck",
+    "lengthCm": 100.3,
+    "widthCm": 24.8,
+    "style": "drop-down",
+    "flex": "medium",
+    "flexRating": 3,
+    "tags": ["freeride", "commuter", "mid-range"],
+    "notes": "Comfortable drop-down platform for push-friendly freeride and electric commuters.",
+    "offers": [
+      {
+        "vendorName": "Sector 9 / Nord Boards",
+        "productUrl": "https://nordboards.com/products/sector-9-fault-line-perch-longboard-deck",
+        "priceUsd": 109
+      }
+    ]
+  },
+  {
+    "id": "deck-budget-drop-through-40",
+    "brand": "Budget",
+    "name": "40\" Drop-Through Maple Deck",
     "category": "deck",
     "lengthCm": 101.6,
-    "style": "downhill",
-    "flex": "stiff",
-    "notes": "Micro-drop speedboard known for stability at high speeds and loaded builds."
-  },
-  {
-    "id": "deck-evolve-bamboo-gtr",
-    "brand": "Evolve",
-    "name": "Bamboo GTR Deck",
-    "category": "deck",
-    "lengthCm": 96,
-    "style": "commuter",
+    "widthCm": 22.9,
+    "style": "drop-through",
     "flex": "medium",
-    "notes": "Classic bamboo flex deck with comfortable concave for all-day cruising."
+    "flexRating": 3,
+    "tags": ["budget", "beginner", "commuter"],
+    "notes": "Affordable 8-ply maple platform inspired by Atom/Minority style drop-through decks.",
+    "offers": [
+      {
+        "vendorName": "Generic / Amazon",
+        "productUrl": "https://www.amazon.com/Atom-Drop-Through-Longboard-Inch/dp/B06X3WQFFV",
+        "priceUsd": 69
+      }
+    ]
   },
   {
-    "id": "deck-rayne-anthem-38",
-    "brand": "Rayne",
-    "name": "Anthem 38",
+    "id": "deck-madrid-trance-39",
+    "brand": "Madrid",
+    "name": "Trance Drop-Through 39\"",
     "category": "deck",
-    "lengthCm": 96.5,
-    "style": "freeride",
-    "flex": "stiff",
-    "notes": "Vert-lam construction with mild rocker and pockets for a locked-in electric setup."
+    "lengthCm": 99.1,
+    "widthCm": 24.1,
+    "style": "drop-through",
+    "flex": "medium",
+    "flexRating": 3,
+    "tags": ["commuter", "freeride", "mid-range"],
+    "notes": "Cambered maple drop-through with mild concave for relaxed cruising and light carving.",
+    "offers": [
+      {
+        "vendorName": "Madrid Skateboards",
+        "productUrl": "https://madridskateboards.com/collections/longboard-decks/products/trance-drop-through-longboard-deck",
+        "priceUsd": 139
+      }
+    ]
   }
 ]

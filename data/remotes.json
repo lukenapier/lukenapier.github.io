@@ -6,7 +6,14 @@
     "category": "remote",
     "escFamilies": ["VESC"],
     "hasTelemetry": false,
-    "notes": "Trigger-style remote with latching power and swappable shells."
+    "notes": "Trigger-style remote with latching power and swappable shells.",
+    "offers": [
+      {
+        "vendorName": "Hoyt St",
+        "productUrl": "https://www.hoytskate.com/collections/accessories/products/hoyt-st-puck-remote",
+        "priceUsd": 179
+      }
+    ]
   },
   {
     "id": "remote-flipsky-vx3",
@@ -15,6 +22,13 @@
     "category": "remote",
     "escFamilies": ["VESC"],
     "hasTelemetry": true,
-    "notes": "2.4GHz remote with screen telemetry and cruise control support."
+    "notes": "2.4GHz remote with screen telemetry and cruise control support.",
+    "offers": [
+      {
+        "vendorName": "Flipsky",
+        "productUrl": "https://flipsky.net/products/flipsky-vx3-remote",
+        "priceUsd": 129
+      }
+    ]
   }
 ]

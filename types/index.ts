@@ -9,6 +9,12 @@ export type ComponentCategory =
   | "drive_kit"
   | "remote";
 
+export interface Offer {
+  vendorName: string;
+  productUrl: string;
+  priceUsd: number;
+}
+
 export interface BoardComponent {
   id: string;
   brand: string;
@@ -16,13 +22,26 @@ export interface BoardComponent {
   category: ComponentCategory;
   notes?: string;
   tags?: string[];
+  offers?: Offer[];
 }
+
+export type DeckStyle =
+  | "commuter"
+  | "freeride"
+  | "downhill"
+  | "carver"
+  | "cruiser"
+  | "top-mount"
+  | "drop-through"
+  | "drop-down";
 
 export interface Deck extends BoardComponent {
   category: "deck";
   lengthCm: number;
-  style: "commuter" | "freeride" | "downhill" | "carver" | "cruiser";
+  widthCm?: number;
+  style: DeckStyle;
   flex?: "stiff" | "medium" | "flexy";
+  flexRating?: number;
 }
 
 export interface Trucks extends BoardComponent {

@@ -7,7 +7,14 @@
     "cells": "10S4P",
     "voltageClass": "10S",
     "capacityWh": 504,
-    "notes": "Samsung 35E-based pack used on Evolve GTR with integrated BMS."
+    "notes": "Samsung 35E-based pack used on Evolve GTR with integrated BMS.",
+    "offers": [
+      {
+        "vendorName": "Evolve Skateboards",
+        "productUrl": "https://www.evolveskateboardsusa.com/products/gtr-series-10s4p-battery",
+        "priceUsd": 499
+      }
+    ]
   },
   {
     "id": "battery-meepo-ercell-10s2p",
@@ -17,7 +24,14 @@
     "cells": "10S2P",
     "voltageClass": "10S",
     "capacityWh": 288,
-    "notes": "Compact ER pack often paired with Hobbywing ESCs for commuter builds."
+    "notes": "Compact ER pack often paired with Hobbywing ESCs for commuter builds.",
+    "offers": [
+      {
+        "vendorName": "Meepo Board",
+        "productUrl": "https://www.meepoboard.com/products/10s2p-extended-range-battery",
+        "priceUsd": 239
+      }
+    ]
   },
   {
     "id": "battery-hurricane-12s4p-p42a",
@@ -27,7 +41,14 @@
     "cells": "12S4P",
     "voltageClass": "12S",
     "capacityWh": 725,
-    "notes": "High-discharge 21700 pack using Molicel P42A cells for powerful setups."
+    "notes": "High-discharge 21700 pack using Molicel P42A cells for powerful setups.",
+    "offers": [
+      {
+        "vendorName": "Meepo Board",
+        "productUrl": "https://www.meepoboard.com/products/hurricane-battery",
+        "priceUsd": 549
+      }
+    ]
   },
   {
     "id": "battery-backfire-zealot-s-12s2p",
@@ -37,6 +58,13 @@
     "cells": "12S2P",
     "voltageClass": "12S",
     "capacityWh": 346,
-    "notes": "Lightweight 21700 pack balanced for range and punch on street wheels."
+    "notes": "Lightweight 21700 pack balanced for range and punch on street wheels.",
+    "offers": [
+      {
+        "vendorName": "Backfire Boards",
+        "productUrl": "https://www.backfireboards.com/products/zealot-s-battery",
+        "priceUsd": 299
+      }
+    ]
   }
 ]

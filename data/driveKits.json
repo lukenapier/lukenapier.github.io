@@ -8,7 +8,14 @@
     "supportedVoltageClasses": ["10S", "12S"],
     "kv": 170,
     "characterTag": "torque",
-    "notes": "Dual 6380 motors with 15/36 gearing for punchy hill performance."
+    "notes": "Dual 6380 motors with 15/36 gearing for punchy hill performance.",
+    "offers": [
+      {
+        "vendorName": "DIY Electric Skateboard",
+        "productUrl": "https://diyelectricskateboard.com/products/torqueboards-dual-belt-drive-kit",
+        "priceUsd": 599
+      }
+    ]
   },
   {
     "id": "drive-evolve-gtr-belt-5065",
@@ -19,7 +26,14 @@
     "supportedVoltageClasses": ["10S"],
     "kv": 150,
     "characterTag": "balanced",
-    "notes": "Stock Evolve belt setup tuned around 32T/15T ratios for mixed terrain."
+    "notes": "Stock Evolve belt setup tuned around 32T/15T ratios for mixed terrain.",
+    "offers": [
+      {
+        "vendorName": "Evolve Skateboards",
+        "productUrl": "https://www.evolveskateboardsusa.com/products/gtr-drive-kit",
+        "priceUsd": 449
+      }
+    ]
   },
   {
     "id": "drive-onsra-direct-170kv",
@@ -30,7 +44,14 @@
     "supportedVoltageClasses": ["10S", "12S"],
     "kv": 170,
     "characterTag": "speed",
-    "notes": "Low-maintenance direct drive with steel sleeves for urethane wheels."
+    "notes": "Low-maintenance direct drive with steel sleeves for urethane wheels.",
+    "offers": [
+      {
+        "vendorName": "Onsra",
+        "productUrl": "https://onsra.com/products/onsra-direct-drive-kit",
+        "priceUsd": 699
+      }
+    ]
   },
   {
     "id": "drive-boundmotor-gear-150kv",
@@ -41,6 +62,13 @@
     "supportedVoltageClasses": ["10S", "12S"],
     "kv": 150,
     "characterTag": "torque",
-    "notes": "Sealed gear drive with straight-cut reduction for off-road traction."
+    "notes": "Sealed gear drive with straight-cut reduction for off-road traction.",
+    "offers": [
+      {
+        "vendorName": "BoundMotor",
+        "productUrl": "https://boundmotor.com/product/gear-drive-system/",
+        "priceUsd": 509
+      }
+    ]
   }
 ]
