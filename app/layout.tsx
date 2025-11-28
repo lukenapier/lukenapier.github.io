@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "BoardBuilder – Custom Electronic Board Planner",
+  title: "BoardBuilder – Electric Longboard Build Planner",
   description:
-    "Build and validate electronic board designs like PCPartPicker, but for microcontrollers and sensors."
+    "Plan and compare electric longboard (esk8) builds, part by part. Choose decks, batteries, ESCs, drive kits, and more – like PCPartPicker for electric skateboards.",
 };
 
 export default function RootLayout({

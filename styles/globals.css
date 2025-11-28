@@ -5,3 +5,12 @@
 body {
   @apply bg-slate-950 text-slate-100;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
