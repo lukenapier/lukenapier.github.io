@@ -25,23 +25,27 @@ export interface BoardComponent {
   offers?: Offer[];
 }
 
-export type DeckStyle =
-  | "commuter"
-  | "freeride"
-  | "downhill"
-  | "carver"
-  | "cruiser"
-  | "top-mount"
-  | "drop-through"
-  | "drop-down";
+export type DeckStyle = string;
 
-export interface Deck extends BoardComponent {
+export interface Deck {
+  id: string;
+  brand: string;
+  name: string;
   category: "deck";
+  style: DeckStyle;
   lengthCm: number;
   widthCm?: number;
-  style: DeckStyle;
-  flex?: "stiff" | "medium" | "flexy";
-  flexRating?: number;
+  wheelbaseMinCm?: number;
+  wheelbaseMaxCm?: number;
+  flex?: number | string;
+  weightDeckOnlyLb?: number;
+  tags?: string[];
+  notes?: string;
+  vendorName: string;
+  productUrl: string;
+  priceCurrency: string;
+  priceValue: number;
+  lastVerifiedAt?: string;
 }
 
 export interface Trucks extends BoardComponent {
