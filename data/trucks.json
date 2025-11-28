@@ -7,7 +7,14 @@
     "hangerWidthMm": 180,
     "baseplateAngleDeg": 50,
     "type": "RKP",
-    "notes": "Forged 356 aluminum RKP truck popular for carving electric setups."
+    "notes": "Forged 356 aluminum RKP truck popular for carving electric setups.",
+    "offers": [
+      {
+        "vendorName": "MuirSkate",
+        "productUrl": "https://www.muirskate.com/longboard/products/paris-v3-180mm-50-degree-longboard-trucks",
+        "priceUsd": 65
+      }
+    ]
   },
   {
     "id": "trucks-caliber-iii-184",
@@ -17,7 +24,14 @@
     "hangerWidthMm": 184,
     "baseplateAngleDeg": 50,
     "type": "RKP",
-    "notes": "Tall bushing seat with rigid hanger—common on powerful DIY builds."
+    "notes": "Tall bushing seat with rigid hanger—common on powerful DIY builds.",
+    "offers": [
+      {
+        "vendorName": "Caliber Truck Co.",
+        "productUrl": "https://calibertruckco.com/products/caliber-iii-rkp-50",
+        "priceUsd": 70
+      }
+    ]
   },
   {
     "id": "trucks-bear-grizzly-gen6",
@@ -27,6 +41,13 @@
     "hangerWidthMm": 181,
     "baseplateAngleDeg": 50,
     "type": "RKP",
-    "notes": "Responsive downhill-inspired RKP truck with beefy axles for electric use."
+    "notes": "Responsive downhill-inspired RKP truck with beefy axles for electric use.",
+    "offers": [
+      {
+        "vendorName": "Landyachtz",
+        "productUrl": "https://landyachtz.com/products/bear-grizzly-181mm-50-degree-trucks",
+        "priceUsd": 58
+      }
+    ]
   }
 ]

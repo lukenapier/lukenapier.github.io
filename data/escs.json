@@ -8,7 +8,14 @@
     "maxContinuousCurrentA": 60,
     "motorCount": "dual",
     "hasTelemetry": true,
-    "notes": "Dual VESC-based controller with Bluetooth and CAN for high-power builds."
+    "notes": "Dual VESC-based controller with Bluetooth and CAN for high-power builds.",
+    "offers": [
+      {
+        "vendorName": "Flipsky",
+        "productUrl": "https://flipsky.net/products/flipsky-fsesc-6-6-dual",
+        "priceUsd": 319
+      }
+    ]
   },
   {
     "id": "esc-makerx-dv6",
@@ -19,7 +26,14 @@
     "maxContinuousCurrentA": 60,
     "motorCount": "dual",
     "hasTelemetry": true,
-    "notes": "Compact dual VESC with aluminum shell and strong braking."
+    "notes": "Compact dual VESC with aluminum shell and strong braking.",
+    "offers": [
+      {
+        "vendorName": "MakerX",
+        "productUrl": "https://makerx-tech.com/products/dv6-dual-esc",
+        "priceUsd": 259
+      }
+    ]
   },
   {
     "id": "esc-hobbywing-v4-dual",
@@ -30,6 +44,13 @@
     "maxContinuousCurrentA": 40,
     "motorCount": "dual",
     "hasTelemetry": false,
-    "notes": "Smooth, quiet control stack widely shipped on commuter prebuilts."
+    "notes": "Smooth, quiet control stack widely shipped on commuter prebuilts.",
+    "offers": [
+      {
+        "vendorName": "Hobbywing",
+        "productUrl": "https://www.hobbywingdirect.com/products/hobbywing-esc-for-electric-skateboard",
+        "priceUsd": 189
+      }
+    ]
   }
 ]

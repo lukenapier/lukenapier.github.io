@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { ComparisonTable, type ComparisonColumn } from "./components/ComparisonTable";
 import { useCatalog } from "./hooks/useCatalog";
 import { evaluateBuild } from "@/lib/validation";
 import type {
@@ -14,6 +15,7 @@ import type {
   Trucks,
   Wheels,
   BuildPart,
+  Offer,
 } from "@/types";
 
 function capitalize(word?: string) {
@@ -25,9 +27,34 @@ function formatDisplayName(part: BuildPart) {
   return `${part.brand} ${part.name}`;
 }
 
+function formatPrice(value?: number) {
+  if (value === undefined) return undefined;
+  return `$${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+}
+
+function getPrimaryOffer(part?: BuildPart): Offer | undefined {
+  return part?.offers?.[0];
+}
+
+function formatNameWithPrice(part?: BuildPart) {
+  if (!part) return "Not selected";
+  const price = formatPriceDisplay(part);
+  return `${formatDisplayName(part)}${price ? ` · ${price}` : ""}`;
+}
+
+function getFlexLabel(deck: Deck) {
+  if (deck.flexRating !== undefined) return `Flex ${deck.flexRating}`;
+  return deck.flex ? `${capitalize(deck.flex)} flex` : undefined;
+}
+
 function formatDeckSummary(deck: Deck) {
-  const flexLabel = deck.flex ? `${capitalize(deck.flex)} flex` : undefined;
-  return [`${deck.lengthCm}cm`, capitalize(deck.style), flexLabel]
+  const flexLabel = getFlexLabel(deck);
+  return [
+    `${deck.lengthCm}cm`,
+    deck.widthCm ? `${deck.widthCm}cm wide` : undefined,
+    capitalize(deck.style),
+    flexLabel,
+  ]
     .filter(Boolean)
     .join(" · ");
 }
@@ -79,6 +106,19 @@ function formatRemoteSummary(remote: Remote) {
   ]
     .filter(Boolean)
     .join(" · ");
+}
+
+function getPriceValue(part?: BuildPart) {
+  return getPrimaryOffer(part)?.priceUsd;
+}
+
+function calculateEstimatedTotal(parts: BuildPart[]) {
+  return parts.reduce((total, part) => total + (getPriceValue(part) ?? 0), 0);
+}
+
+function formatPriceDisplay(part?: BuildPart) {
+  const value = getPriceValue(part);
+  return formatPrice(value) ?? "N/A";
 }
 
 function getKeySpec(item?: BuildPart) {
@@ -134,6 +174,7 @@ function SelectorCard({
   onSelect,
   isSelected,
   badge,
+  offer,
 }: {
   title: string;
   description?: string;
@@ -141,6 +182,7 @@ function SelectorCard({
   onSelect: () => void;
   isSelected: boolean;
   badge?: string;
+  offer?: Offer;
 }) {
   return (
     <div
@@ -152,6 +194,29 @@ function SelectorCard({
         <div>
           <p className="text-sm font-semibold text-slate-100">{title}</p>
           {description ? <p className="text-[11px] text-slate-400">{description}</p> : null}
+          <p className="mt-2 text-[11px] text-slate-300">
+            {offer?.priceUsd !== undefined ? (
+              <span className="font-semibold text-white">{formatPrice(offer.priceUsd)}</span>
+            ) : (
+              <span className="text-slate-500">Price N/A</span>
+            )}
+            {offer?.vendorName ? (
+              <>
+                {" "}·{" "}
+                {offer.productUrl ? (
+                  <a
+                    href={offer.productUrl}
+                    target="_blank"
+                    className="text-emerald-300 underline-offset-2 hover:text-emerald-200 hover:underline"
+                  >
+                    {offer.vendorName}
+                  </a>
+                ) : (
+                  offer.vendorName
+                )}
+              </>
+            ) : null}
+          </p>
         </div>
         {badge ? (
           <span className="rounded-lg bg-slate-800 px-2 py-1 text-[11px] text-slate-200">{badge}</span>
@@ -186,6 +251,7 @@ function formatBoardName(deck?: Deck) {
 export default function HomePage() {
   const catalog = useCatalog();
   const [build, setBuild] = useState<BuildState>({});
+  const [showDeckComparison, setShowDeckComparison] = useState(false);
 
   const validations = useMemo(() => evaluateBuild(build), [build]);
 
@@ -202,6 +268,8 @@ export default function HomePage() {
       ].filter(Boolean) as BuildPart[],
     [build]
   );
+
+  const estimatedTotal = useMemo(() => calculateEstimatedTotal(selectedParts), [selectedParts]);
 
   const sharedIntentTags = useMemo(() => {
     const partsWithTags = selectedParts.filter((part) => part.tags && part.tags.length);
@@ -223,6 +291,48 @@ export default function HomePage() {
       .map(([tag]) => tag);
   }, [selectedParts]);
 
+  const deckComparisonColumns = useMemo<ComparisonColumn<Deck>[]>(
+    () => [
+      {
+        key: "brand",
+        label: "Brand",
+        render: (deck) => deck.brand,
+      },
+      {
+        key: "name",
+        label: "Name",
+        render: (deck) => deck.name,
+      },
+      {
+        key: "length",
+        label: "Length (cm)",
+        sortable: true,
+        getSortValue: (deck) => deck.lengthCm,
+        render: (deck) => `${deck.lengthCm.toFixed(1)}`,
+      },
+      {
+        key: "style",
+        label: "Style",
+        render: (deck) => capitalize(deck.style),
+      },
+      {
+        key: "flex",
+        label: "Flex",
+        sortable: true,
+        getSortValue: (deck) => deck.flexRating ?? deck.flex ?? "",
+        render: (deck) => getFlexLabel(deck) ?? "N/A",
+      },
+      {
+        key: "price",
+        label: "Price (USD)",
+        sortable: true,
+        getSortValue: (deck) => getPriceValue(deck),
+        render: (deck) => formatPrice(getPriceValue(deck)) ?? "N/A",
+      },
+    ],
+    [],
+  );
+
   const handleDeckSelect = (deck: Deck) => setBuild((prev) => ({ ...prev, selectedDeck: deck }));
   const handleTrucksSelect = (trucks: Trucks) =>
     setBuild((prev) => ({ ...prev, selectedTrucks: trucks }));
@@ -235,6 +345,22 @@ export default function HomePage() {
     setBuild((prev) => ({ ...prev, selectedDriveKit: driveKit }));
   const handleRemoteSelect = (remote: Remote) =>
     setBuild((prev) => ({ ...prev, selectedRemote: remote }));
+
+  const renderVendor = (part?: BuildPart) => {
+    const offer = getPrimaryOffer(part);
+    if (!offer?.vendorName) return "N/A";
+    return offer.productUrl ? (
+      <a
+        href={offer.productUrl}
+        target="_blank"
+        className="text-emerald-200 underline-offset-2 hover:underline"
+      >
+        {offer.vendorName}
+      </a>
+    ) : (
+      offer.vendorName
+    );
+  };
 
   const bomEntries: Array<{
     label: string;
@@ -338,16 +464,38 @@ export default function HomePage() {
                     meta={
                       [
                         `${deck.lengthCm}cm`,
+                        deck.widthCm ? `${deck.widthCm}cm wide` : undefined,
                         capitalize(deck.style),
-                        deck.flex ? `${capitalize(deck.flex)} flex` : undefined,
+                        getFlexLabel(deck),
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleDeckSelect(deck)}
                     isSelected={build.selectedDeck?.id === deck.id}
                     badge="Deck"
+                    offer={getPrimaryOffer(deck)}
                   />
                 ))}
               </div>
+
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <p className="text-[12px] text-slate-400">Compare specs and pricing across decks.</p>
+                <button
+                  className="text-[12px] rounded-lg border border-emerald-500/60 px-3 py-1 font-semibold text-emerald-200 hover:bg-emerald-500/10"
+                  onClick={() => setShowDeckComparison((prev) => !prev)}
+                >
+                  {showDeckComparison ? "Hide deck comparison" : "Compare decks"}
+                </button>
+              </div>
+
+              {showDeckComparison ? (
+                <div className="mt-3">
+                  <ComparisonTable
+                    items={catalog.decks}
+                    columns={deckComparisonColumns}
+                    highlightedId={build.selectedDeck?.id}
+                  />
+                </div>
+              ) : null}
             </div>
 
             <div>
@@ -389,6 +537,7 @@ export default function HomePage() {
                     onSelect={() => handleTrucksSelect(truck)}
                     isSelected={build.selectedTrucks?.id === truck.id}
                     badge="Trucks"
+                    offer={getPrimaryOffer(truck)}
                   />
                 ))}
               </div>
@@ -431,6 +580,7 @@ export default function HomePage() {
                     onSelect={() => handleWheelsSelect(wheel)}
                     isSelected={build.selectedWheels?.id === wheel.id}
                     badge="Wheels"
+                    offer={getPrimaryOffer(wheel)}
                   />
                 ))}
               </div>
@@ -463,6 +613,7 @@ export default function HomePage() {
                     onSelect={() => handleBatterySelect(battery)}
                     isSelected={build.selectedBattery?.id === battery.id}
                     badge="Battery"
+                    offer={getPrimaryOffer(battery)}
                   />
                 ))}
               </div>
@@ -492,6 +643,7 @@ export default function HomePage() {
                     onSelect={() => handleEscSelect(esc)}
                     isSelected={build.selectedEsc?.id === esc.id}
                     badge="ESC"
+                    offer={getPrimaryOffer(esc)}
                   />
                 ))}
               </div>
@@ -520,6 +672,7 @@ export default function HomePage() {
                     onSelect={() => handleDriveKitSelect(driveKit)}
                     isSelected={build.selectedDriveKit?.id === driveKit.id}
                     badge="Drive Kit"
+                    offer={getPrimaryOffer(driveKit)}
                   />
                 ))}
               </div>
@@ -571,6 +724,7 @@ export default function HomePage() {
                     onSelect={() => handleRemoteSelect(remote)}
                     isSelected={build.selectedRemote?.id === remote.id}
                     badge="Remote"
+                    offer={getPrimaryOffer(remote)}
                   />
                 ))}
               </div>
@@ -593,14 +747,14 @@ export default function HomePage() {
             <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-200">
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Deck</p>
-                <p>{build.selectedDeck ? formatDisplayName(build.selectedDeck) : "Not selected"}</p>
+                <p>{formatNameWithPrice(build.selectedDeck)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedDeck ? formatDeckSummary(build.selectedDeck) : "Select a deck to view specs"}
                 </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Trucks</p>
-                <p>{build.selectedTrucks ? formatDisplayName(build.selectedTrucks) : "Not selected"}</p>
+                <p>{formatNameWithPrice(build.selectedTrucks)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedTrucks
                     ? formatTrucksSummary(build.selectedTrucks)
@@ -609,7 +763,7 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Wheels</p>
-                <p>{build.selectedWheels ? formatDisplayName(build.selectedWheels) : "Not selected"}</p>
+                <p>{formatNameWithPrice(build.selectedWheels)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedWheels
                     ? formatWheelsSummary(build.selectedWheels)
@@ -618,9 +772,7 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Battery</p>
-                <p>
-                  {build.selectedBattery ? formatDisplayName(build.selectedBattery) : "Not selected"}
-                </p>
+                <p>{formatNameWithPrice(build.selectedBattery)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedBattery
                     ? formatBatterySummary(build.selectedBattery)
@@ -629,16 +781,14 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">ESC</p>
-                <p>{build.selectedEsc ? formatDisplayName(build.selectedEsc) : "Not selected"}</p>
+                <p>{formatNameWithPrice(build.selectedEsc)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedEsc ? formatEscSummary(build.selectedEsc) : "Add an ESC to check voltage support"}
                 </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Drive Kit</p>
-                <p>
-                  {build.selectedDriveKit ? formatDisplayName(build.selectedDriveKit) : "Not selected"}
-                </p>
+                <p>{formatNameWithPrice(build.selectedDriveKit)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedDriveKit
                     ? formatDriveKitSummary(build.selectedDriveKit)
@@ -647,11 +797,19 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Remote</p>
-                <p>{build.selectedRemote ? formatDisplayName(build.selectedRemote) : "Not selected"}</p>
+                <p>{formatNameWithPrice(build.selectedRemote)}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedRemote ? formatRemoteSummary(build.selectedRemote) : "Choose a remote to see controls"}
                 </p>
               </div>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/60 p-4">
+              <p className="text-[11px] uppercase tracking-wide text-slate-400">Estimated build cost</p>
+              <p className="text-2xl font-bold text-emerald-200 mt-1">
+                {formatPrice(estimatedTotal) ?? "$0"}
+              </p>
+              <p className="text-xs text-slate-400">Summed from selected parts.</p>
             </div>
 
             {sharedIntentTags?.length ? (
@@ -702,23 +860,34 @@ export default function HomePage() {
           <div className="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
             <p className="font-semibold text-sky-300 text-sm mb-3">Bill of Materials</p>
             <div className="space-y-2 text-xs text-slate-200">
+              <div className="grid grid-cols-[1.1fr,0.9fr,0.6fr] items-center px-2 py-1 text-[11px] uppercase tracking-wide text-slate-400">
+                <span>Part</span>
+                <span>Vendor</span>
+                <span className="text-right">Price</span>
+              </div>
               {bomEntries.map(({ label, item, specs }) => (
                 <div
                   key={label}
-                  className="flex items-start justify-between gap-3 rounded-lg border border-slate-800 bg-slate-900/40 p-3"
+                  className="grid grid-cols-[1.1fr,0.9fr,0.6fr] items-start gap-3 rounded-lg border border-slate-800 bg-slate-900/40 p-3"
                 >
                   <div>
                     <p className="text-[11px] uppercase text-slate-400">{label}</p>
                     <p className="text-sm font-semibold text-white">
                       {item ? formatDisplayName(item) : "Not selected"}
                     </p>
-                    {item?.notes ? <p className="text-[11px] text-slate-400 mt-1">{item.notes}</p> : null}
+                    <p className="text-[11px] text-slate-400 mt-1">{item ? specs(item) : "Choose a part"}</p>
                   </div>
-                  <div className="text-right text-[11px] text-slate-300 min-w-[120px]">
-                    {item ? specs(item) : "Choose a part"}
+                  <div className="text-[11px] text-slate-200">{renderVendor(item)}</div>
+                  <div className="text-right text-[11px] font-semibold text-emerald-200">
+                    {item ? formatPriceDisplay(item) : "—"}
                   </div>
                 </div>
               ))}
+              <div className="grid grid-cols-[1.1fr,0.9fr,0.6fr] items-center gap-3 rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-3 text-sm font-semibold text-emerald-100">
+                <span>Subtotal</span>
+                <span className="text-xs text-emerald-100/80">Selected parts</span>
+                <span className="text-right text-base">{formatPrice(estimatedTotal) ?? "$0"}</span>
+              </div>
             </div>
           </div>
         </div>

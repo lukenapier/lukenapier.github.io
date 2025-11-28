@@ -7,7 +7,14 @@
     "diameterMm": 85,
     "durometerA": 83,
     "type": "street",
-    "notes": "Happy Thane formula with wide contact patch for plush commuting."
+    "notes": "Happy Thane formula with wide contact patch for plush commuting.",
+    "offers": [
+      {
+        "vendorName": "Orangatang",
+        "productUrl": "https://orangatangwheels.com/product/caguama/",
+        "priceUsd": 88
+      }
+    ]
   },
   {
     "id": "wheel-abec11-superfly-107-74a",
@@ -17,7 +24,14 @@
     "diameterMm": 107,
     "durometerA": 74,
     "type": "street",
-    "notes": "Giant urethane wheel that smooths rough pavement and boosts top speed."
+    "notes": "Giant urethane wheel that smooths rough pavement and boosts top speed.",
+    "offers": [
+      {
+        "vendorName": "ABEC 11",
+        "productUrl": "https://abec11.com/collections/wheels/products/superfly-107mm-74a",
+        "priceUsd": 129
+      }
+    ]
   },
   {
     "id": "wheel-cloudwheel-discovery-105-78a",
@@ -27,7 +41,14 @@
     "diameterMm": 105,
     "durometerA": 78,
     "type": "all-terrain",
-    "notes": "Vapor-core airless design that softens cracks without full pneumatics."
+    "notes": "Vapor-core airless design that softens cracks without full pneumatics.",
+    "offers": [
+      {
+        "vendorName": "IWONDER",
+        "productUrl": "https://www.cloudwheel.com/products/cloudwheel-discovery-105mm",
+        "priceUsd": 119
+      }
+    ]
   },
   {
     "id": "wheel-evolve-gt-97-76a",
@@ -37,6 +58,13 @@
     "diameterMm": 97,
     "durometerA": 76,
     "type": "street",
-    "notes": "Stone-ground urethane tuned for Evolve belt drive boards and long ranges."
+    "notes": "Stone-ground urethane tuned for Evolve belt drive boards and long ranges.",
+    "offers": [
+      {
+        "vendorName": "Evolve Skateboards",
+        "productUrl": "https://www.evolveskateboardsusa.com/products/97mm-street-wheels",
+        "priceUsd": 110
+      }
+    ]
   }
 ]
