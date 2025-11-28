@@ -36,7 +36,6 @@ import {
 const VALIDATION_CLASS: Record<ValidationResult["severity"], string> = {
   error: "border-red-500/40 bg-red-500/10 text-red-200",
   warning: "border-amber-500/40 bg-amber-500/10 text-amber-200",
-  info: "border-slate-700 bg-slate-900/60 text-slate-200",
 };
 
 type BuildTabProps = {
@@ -175,10 +174,12 @@ export function BuildTab({
               ) : (
                 validations.map((validation) => (
                   <div
-                    key={`${validation.field}-${validation.message}`}
+                    key={validation.id}
                     className={`rounded-xl border px-3 py-2 ${VALIDATION_CLASS[validation.severity]}`}
                   >
-                    <p className="text-[11px] uppercase tracking-wide">{validation.field}</p>
+                    <p className="text-[11px] uppercase tracking-wide">
+                      {validation.ruleId.replace(/-/g, " ")}
+                    </p>
                     <p className="text-sm font-semibold">{validation.message}</p>
                   </div>
                 ))
