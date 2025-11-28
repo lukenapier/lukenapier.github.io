@@ -1,44 +1,46 @@
 [
   {
-    "id": "drivekit-ht-170",
-    "name": "170KV Torque Belt Drive",
+    "id": "drive-torqueboards-6380-dual-belt",
+    "brand": "TorqueBoards",
+    "name": "Dual 6380 Belt Kit",
     "category": "drive_kit",
-    "kv": 170,
-    "supportedVoltageClasses": ["8S", "10S"],
-    "maxPowerW": 2800,
-    "profile": "high_torque",
     "driveType": "belt",
-    "ratio": "15/36",
-    "wheelCompatibility": "90-110mm street",
-    "notes": "Geared for hill climbing and heavier riders.",
-    "tags": ["commuter", "hill", "cargo"]
+    "supportedVoltageClasses": ["10S", "12S"],
+    "kv": 170,
+    "characterTag": "torque",
+    "notes": "Dual 6380 motors with 15/36 gearing for punchy hill performance."
   },
   {
-    "id": "drivekit-balanced-190",
-    "name": "190KV Sealed Gear Drive",
+    "id": "drive-evolve-gtr-belt-5065",
+    "brand": "Evolve",
+    "name": "GTR 5065 Belt Drive",
     "category": "drive_kit",
-    "kv": 190,
+    "driveType": "belt",
+    "supportedVoltageClasses": ["10S"],
+    "kv": 150,
+    "characterTag": "balanced",
+    "notes": "Stock Evolve belt setup tuned around 32T/15T ratios for mixed terrain."
+  },
+  {
+    "id": "drive-onsra-direct-170kv",
+    "brand": "Onsra",
+    "name": "Direct Drive 170KV",
+    "category": "drive_kit",
+    "driveType": "direct",
     "supportedVoltageClasses": ["10S", "12S"],
-    "maxPowerW": 3200,
-    "profile": "balanced",
+    "kv": 170,
+    "characterTag": "speed",
+    "notes": "Low-maintenance direct drive with steel sleeves for urethane wheels."
+  },
+  {
+    "id": "drive-boundmotor-gear-150kv",
+    "brand": "BoundMotor",
+    "name": "Gear Drive 150KV",
+    "category": "drive_kit",
     "driveType": "gear",
-    "ratio": "2.4:1",
-    "wheelCompatibility": "97-110mm street/AT",
-    "notes": "Blend of acceleration and top speed with low maintenance.",
-    "tags": ["performance", "speed"]
-  },
-  {
-    "id": "drivekit-speed-200",
-    "name": "200KV Stealth Hub Set",
-    "category": "drive_kit",
-    "kv": 200,
     "supportedVoltageClasses": ["10S", "12S"],
-    "maxPowerW": 3000,
-    "profile": "high_speed",
-    "driveType": "hub",
-    "ratio": "direct",
-    "wheelCompatibility": "90-105mm street",
-    "notes": "Low-drag hub motors optimized for fast flats.",
-    "tags": ["speed", "stealth"]
+    "kv": 150,
+    "characterTag": "torque",
+    "notes": "Sealed gear drive with straight-cut reduction for off-road traction."
   }
 ]

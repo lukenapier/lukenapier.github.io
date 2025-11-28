@@ -21,64 +21,64 @@ function capitalize(word?: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+function formatDisplayName(part: BuildPart) {
+  return `${part.brand} ${part.name}`;
+}
+
 function formatDeckSummary(deck: Deck) {
-  const style = deck.deckStyle ? capitalize(deck.deckStyle) : capitalize(deck.mountStyle);
-  const flexLabel = deck.flex ? `${deck.flex} flex` : undefined;
-  return [
-    `${deck.lengthCm}cm`,
-    style,
-    flexLabel,
-    deck.wheelbaseCm ? `${deck.wheelbaseCm}cm wheelbase` : undefined,
-  ]
+  const flexLabel = deck.flex ? `${capitalize(deck.flex)} flex` : undefined;
+  return [`${deck.lengthCm}cm`, capitalize(deck.style), flexLabel]
     .filter(Boolean)
     .join(" · ");
 }
 
 function formatTrucksSummary(trucks: Trucks) {
-  const angle = trucks.baseplateAngleDeg ? `${trucks.baseplateAngleDeg}°` : undefined;
-  return [`${trucks.widthMm}mm`, trucks.truckType, angle].filter(Boolean).join(" · ");
+  return [`${trucks.hangerWidthMm}mm hanger`, `${trucks.baseplateAngleDeg}°`, trucks.type]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function formatWheelsSummary(wheels: Wheels) {
-  const shape = wheels.lipShape ? `${wheels.lipShape} lip` : undefined;
-  return [`${wheels.diameterMm}mm`, `${wheels.hardnessA}A`, wheels.wheelType, shape]
+  return [`${wheels.diameterMm}mm`, `${wheels.durometerA}A`, capitalize(wheels.type)]
     .filter(Boolean)
     .join(" · ");
 }
 
 function formatBatterySummary(battery: Battery) {
-  return [
-    `${battery.capacityWh}Wh`,
-    battery.voltageClass,
-    battery.configuration,
-    battery.cellFormat,
-  ]
+  return [`${battery.cells}`, `${battery.capacityWh}Wh`, battery.voltageClass]
     .filter(Boolean)
     .join(" · ");
 }
 
 function formatEscSummary(esc: Esc) {
   const motorLabel = esc.motorCount === "dual" ? "Dual" : "Single";
-  const telemetryLabel = esc.hasTelemetry ? "Telemetry" : undefined;
   return [
     `Supports ${esc.supportedVoltageClasses.join("/")}`,
     `${motorLabel} motor`,
-    telemetryLabel,
+    `${esc.maxContinuousCurrentA}A max`,
+    esc.hasTelemetry ? "Telemetry" : undefined,
   ]
     .filter(Boolean)
     .join(" · ");
 }
 
 function formatDriveKitSummary(driveKit: DriveKit) {
-  const type = driveKit.driveType ? capitalize(driveKit.driveType) : "Belt";
-  const profile = driveKit.profile.replace("_", " ");
-  return [type, `${driveKit.kv}KV`, driveKit.ratio, profile].filter(Boolean).join(" · ");
+  return [
+    `${capitalize(driveKit.driveType)} drive`,
+    `${driveKit.kv}KV`,
+    `${capitalize(driveKit.characterTag)}`,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function formatRemoteSummary(remote: Remote) {
-  const control = remote.triggerStyle ? `${capitalize(remote.triggerStyle)} control` : undefined;
-  const telemetry = remote.hasTelemetry ? "Telemetry" : undefined;
-  return [control, remote.frequency, telemetry].filter(Boolean).join(" · ");
+  return [
+    `ESC: ${remote.escFamilies.join("/")}`,
+    remote.hasTelemetry ? "Telemetry" : "No telemetry",
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function getKeySpec(item?: BuildPart) {
@@ -310,10 +310,14 @@ export default function HomePage() {
               <SectionHeader
                 title="Deck"
                 subtitle="Choose your platform"
-                selectedLabel={build.selectedDeck?.name}
+                selectedLabel={
+                  build.selectedDeck ? formatDisplayName(build.selectedDeck) : undefined
+                }
               />
               {build.selectedDeck ? (
-                <div className="mt-2 text-[11px] text-emerald-200">Selected: {build.selectedDeck.name}</div>
+                <div className="mt-2 text-[11px] text-emerald-200">
+                  Selected: {formatDisplayName(build.selectedDeck)}
+                </div>
               ) : (
                 <div className="mt-2 text-[11px] text-slate-400">Not selected yet</div>
               )}
@@ -329,13 +333,13 @@ export default function HomePage() {
                 {catalog.decks.map((deck) => (
                   <SelectorCard
                     key={deck.id}
-                    title={deck.name}
+                    title={formatDisplayName(deck)}
                     description={deck.notes}
                     meta={
                       [
                         `${deck.lengthCm}cm`,
-                        deck.deckStyle ? capitalize(deck.deckStyle) : deck.mountStyle,
-                        deck.flex ? `${deck.flex} flex` : undefined,
+                        capitalize(deck.style),
+                        deck.flex ? `${capitalize(deck.flex)} flex` : undefined,
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleDeckSelect(deck)}
@@ -350,11 +354,13 @@ export default function HomePage() {
               <SectionHeader
                 title="Trucks"
                 subtitle="Dial in your turning style"
-                selectedLabel={build.selectedTrucks?.name}
+                selectedLabel={
+                  build.selectedTrucks ? formatDisplayName(build.selectedTrucks) : undefined
+                }
               />
               {build.selectedTrucks ? (
                 <div className="mt-2 text-[11px] text-emerald-200">
-                  Selected: {build.selectedTrucks.name}
+                  Selected: {formatDisplayName(build.selectedTrucks)}
                 </div>
               ) : (
                 <div className="mt-2 text-[11px] text-slate-400">Not selected yet</div>
@@ -371,13 +377,13 @@ export default function HomePage() {
                 {catalog.trucks.map((truck) => (
                   <SelectorCard
                     key={truck.id}
-                    title={truck.name}
+                    title={formatDisplayName(truck)}
                     description={truck.notes}
                     meta={
                       [
-                        `${truck.widthMm}mm`,
-                        `${truck.truckType}`,
-                        truck.baseplateAngleDeg ? `${truck.baseplateAngleDeg}° baseplate` : undefined,
+                        `${truck.hangerWidthMm}mm hanger`,
+                        `${truck.baseplateAngleDeg}° baseplate`,
+                        `${truck.type}`,
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleTrucksSelect(truck)}
@@ -392,11 +398,13 @@ export default function HomePage() {
               <SectionHeader
                 title="Wheels"
                 subtitle="Set your ride feel"
-                selectedLabel={build.selectedWheels?.name}
+                selectedLabel={
+                  build.selectedWheels ? formatDisplayName(build.selectedWheels) : undefined
+                }
               />
               {build.selectedWheels ? (
                 <div className="mt-2 text-[11px] text-emerald-200">
-                  Selected: {build.selectedWheels.name}
+                  Selected: {formatDisplayName(build.selectedWheels)}
                 </div>
               ) : (
                 <div className="mt-2 text-[11px] text-slate-400">Not selected yet</div>
@@ -413,15 +421,13 @@ export default function HomePage() {
                 {catalog.wheels.map((wheel) => (
                   <SelectorCard
                     key={wheel.id}
-                    title={wheel.name}
+                    title={formatDisplayName(wheel)}
                     description={wheel.notes}
-                    meta={
-                      [
-                        `${wheel.diameterMm}mm`,
-                        `${wheel.hardnessA}A`,
-                        wheel.wheelType === "all-terrain" ? "All-terrain" : "Street",
-                      ]
-                    }
+                    meta={[
+                      `${wheel.diameterMm}mm`,
+                      `${wheel.durometerA}A`,
+                      wheel.type === "all-terrain" ? "All-terrain" : "Street",
+                    ]}
                     onSelect={() => handleWheelsSelect(wheel)}
                     isSelected={build.selectedWheels?.id === wheel.id}
                     badge="Wheels"
@@ -445,13 +451,13 @@ export default function HomePage() {
                 {catalog.batteries.map((battery) => (
                   <SelectorCard
                     key={battery.id}
-                    title={battery.name}
+                    title={formatDisplayName(battery)}
                     description={battery.notes}
                     meta={
                       [
+                        `${battery.cells}`,
                         `${battery.capacityWh}Wh`,
                         `${battery.voltageClass}`,
-                        battery.configuration ?? `${battery.continuousDischargeA ?? ""}A`,
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleBatterySelect(battery)}
@@ -473,13 +479,14 @@ export default function HomePage() {
                 {catalog.escs.map((esc) => (
                   <SelectorCard
                     key={esc.id}
-                    title={esc.name}
+                    title={formatDisplayName(esc)}
                     description={esc.notes}
                     meta={
                       [
                         `Supports ${esc.supportedVoltageClasses.join("/")}`,
+                        `${esc.maxContinuousCurrentA}A max`,
                         `${esc.motorCount === "dual" ? "Dual" : "Single"} motor`,
-                        esc.hasBluetooth ? "Bluetooth" : esc.connectors?.[0],
+                        esc.hasTelemetry ? "Telemetry" : undefined,
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleEscSelect(esc)}
@@ -501,14 +508,14 @@ export default function HomePage() {
                 {catalog.driveKits.map((driveKit) => (
                   <SelectorCard
                     key={driveKit.id}
-                    title={driveKit.name}
+                    title={formatDisplayName(driveKit)}
                     description={driveKit.notes}
                     meta={
                       [
-                        `${capitalize(driveKit.driveType || "belt")} drive`,
+                        `${capitalize(driveKit.driveType)} drive`,
                         `${driveKit.kv}KV`,
-                        driveKit.ratio || driveKit.profile.replace("_", " "),
-                      ]
+                        `${capitalize(driveKit.characterTag)}`,
+                      ] as string[]
                     }
                     onSelect={() => handleDriveKitSelect(driveKit)}
                     isSelected={build.selectedDriveKit?.id === driveKit.id}
@@ -530,11 +537,13 @@ export default function HomePage() {
               <SectionHeader
                 title="Remote"
                 subtitle="Control your ride"
-                selectedLabel={build.selectedRemote?.name}
+                selectedLabel={
+                  build.selectedRemote ? formatDisplayName(build.selectedRemote) : undefined
+                }
               />
               {build.selectedRemote ? (
                 <div className="mt-2 text-[11px] text-emerald-200">
-                  Selected: {build.selectedRemote.name}
+                  Selected: {formatDisplayName(build.selectedRemote)}
                 </div>
               ) : (
                 <div className="mt-2 text-[11px] text-slate-400">Not selected yet</div>
@@ -551,15 +560,12 @@ export default function HomePage() {
                 {catalog.remotes.map((remote) => (
                   <SelectorCard
                     key={remote.id}
-                    title={remote.name}
+                    title={formatDisplayName(remote)}
                     description={remote.notes}
                     meta={
                       [
-                        remote.triggerStyle
-                          ? `${capitalize(remote.triggerStyle)} control`
-                          : "Trigger control",
-                        remote.frequency,
-                        remote.hasTelemetry ? "Telemetry" : remote.compatibleEscFamilies?.[0],
+                        `ESC: ${remote.escFamilies.join("/")}`,
+                        remote.hasTelemetry ? "Telemetry" : "No telemetry",
                       ].filter(Boolean) as string[]
                     }
                     onSelect={() => handleRemoteSelect(remote)}
@@ -587,14 +593,14 @@ export default function HomePage() {
             <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-200">
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Deck</p>
-                <p>{build.selectedDeck?.name || "Not selected"}</p>
+                <p>{build.selectedDeck ? formatDisplayName(build.selectedDeck) : "Not selected"}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedDeck ? formatDeckSummary(build.selectedDeck) : "Select a deck to view specs"}
                 </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Trucks</p>
-                <p>{build.selectedTrucks?.name || "Not selected"}</p>
+                <p>{build.selectedTrucks ? formatDisplayName(build.selectedTrucks) : "Not selected"}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedTrucks
                     ? formatTrucksSummary(build.selectedTrucks)
@@ -603,7 +609,7 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Wheels</p>
-                <p>{build.selectedWheels?.name || "Not selected"}</p>
+                <p>{build.selectedWheels ? formatDisplayName(build.selectedWheels) : "Not selected"}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedWheels
                     ? formatWheelsSummary(build.selectedWheels)
@@ -612,7 +618,9 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Battery</p>
-                <p>{build.selectedBattery?.name || "Not selected"}</p>
+                <p>
+                  {build.selectedBattery ? formatDisplayName(build.selectedBattery) : "Not selected"}
+                </p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedBattery
                     ? formatBatterySummary(build.selectedBattery)
@@ -621,14 +629,16 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">ESC</p>
-                <p>{build.selectedEsc?.name || "Not selected"}</p>
+                <p>{build.selectedEsc ? formatDisplayName(build.selectedEsc) : "Not selected"}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedEsc ? formatEscSummary(build.selectedEsc) : "Add an ESC to check voltage support"}
                 </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Drive Kit</p>
-                <p>{build.selectedDriveKit?.name || "Not selected"}</p>
+                <p>
+                  {build.selectedDriveKit ? formatDisplayName(build.selectedDriveKit) : "Not selected"}
+                </p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedDriveKit
                     ? formatDriveKitSummary(build.selectedDriveKit)
@@ -637,7 +647,7 @@ export default function HomePage() {
               </div>
               <div className="space-y-1">
                 <p className="text-xs uppercase text-slate-400">Remote</p>
-                <p>{build.selectedRemote?.name || "Not selected"}</p>
+                <p>{build.selectedRemote ? formatDisplayName(build.selectedRemote) : "Not selected"}</p>
                 <p className="text-[11px] text-slate-400">
                   {build.selectedRemote ? formatRemoteSummary(build.selectedRemote) : "Choose a remote to see controls"}
                 </p>
@@ -699,11 +709,13 @@ export default function HomePage() {
                 >
                   <div>
                     <p className="text-[11px] uppercase text-slate-400">{label}</p>
-                    <p className="text-sm font-semibold text-white">{item?.name || "Not selected"}</p>
+                    <p className="text-sm font-semibold text-white">
+                      {item ? formatDisplayName(item) : "Not selected"}
+                    </p>
                     {item?.notes ? <p className="text-[11px] text-slate-400 mt-1">{item.notes}</p> : null}
                   </div>
                   <div className="text-right text-[11px] text-slate-300 min-w-[120px]">
-                    {item ? specs(item) : ""}
+                    {item ? specs(item) : "Choose a part"}
                   </div>
                 </div>
               ))}

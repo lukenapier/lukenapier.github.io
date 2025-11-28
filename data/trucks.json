@@ -1,38 +1,32 @@
 [
   {
-    "id": "trucks-rkp-180",
-    "name": "180mm 50° RKP Carve",
+    "id": "trucks-paris-v3-180",
+    "brand": "Paris Truck Co.",
+    "name": "V3 180mm 50°",
     "category": "trucks",
-    "widthMm": 180,
-    "truckType": "RKP",
-    "mountCompatibility": ["top-mount", "drop-through"],
+    "hangerWidthMm": 180,
     "baseplateAngleDeg": 50,
-    "axleDiameterMm": 8,
-    "notes": "Responsive turning with stable center and tall bushings.",
-    "tags": ["carve", "commuter"]
+    "type": "RKP",
+    "notes": "Forged 356 aluminum RKP truck popular for carving electric setups."
   },
   {
-    "id": "trucks-pkp-170",
-    "name": "170mm 44° PKP Street",
+    "id": "trucks-caliber-iii-184",
+    "brand": "Caliber",
+    "name": "III 184mm 50°",
     "category": "trucks",
-    "widthMm": 170,
-    "truckType": "PKP",
-    "mountCompatibility": ["top-mount"],
-    "baseplateAngleDeg": 44,
-    "axleDiameterMm": 8,
-    "notes": "Low ride height and quick lean for urban riding.",
-    "tags": ["commuter", "budget"]
+    "hangerWidthMm": 184,
+    "baseplateAngleDeg": 50,
+    "type": "RKP",
+    "notes": "Tall bushing seat with rigid hanger—common on powerful DIY builds."
   },
   {
-    "id": "trucks-rkp-184",
-    "name": "184mm 45° Precision RKP",
+    "id": "trucks-bear-grizzly-gen6",
+    "brand": "Bear",
+    "name": "Grizzly Gen 6 181mm 50°",
     "category": "trucks",
-    "widthMm": 184,
-    "truckType": "RKP",
-    "mountCompatibility": ["top-mount"],
-    "baseplateAngleDeg": 45,
-    "axleDiameterMm": 8,
-    "notes": "CNC hangers with tight tolerances for speed-focused builds.",
-    "tags": ["speed", "downhill"]
+    "hangerWidthMm": 181,
+    "baseplateAngleDeg": 50,
+    "type": "RKP",
+    "notes": "Responsive downhill-inspired RKP truck with beefy axles for electric use."
   }
 ]

@@ -1,54 +1,42 @@
 [
   {
-    "id": "battery-10s-400",
-    "name": "10S 400Wh Commuter Pack",
+    "id": "battery-evolve-gtr-10s4p",
+    "brand": "Evolve",
+    "name": "GTR 10S4P 18650",
     "category": "battery",
-    "capacityWh": 400,
+    "cells": "10S4P",
     "voltageClass": "10S",
-    "continuousDischargeA": 60,
-    "configuration": "10S3P 21700",
-    "cellFormat": "21700",
-    "smartBms": true,
-    "notes": "Balanced range for daily riding with built-in BMS telemetry.",
-    "tags": ["commuter", "beginner"]
+    "capacityWh": 504,
+    "notes": "Samsung 35E-based pack used on Evolve GTR with integrated BMS."
   },
   {
-    "id": "battery-12s-540",
-    "name": "12S 540Wh Performance Pack",
+    "id": "battery-meepo-ercell-10s2p",
+    "brand": "Meepo",
+    "name": "Extended Range 10S2P",
     "category": "battery",
-    "capacityWh": 540,
+    "cells": "10S2P",
+    "voltageClass": "10S",
+    "capacityWh": 288,
+    "notes": "Compact ER pack often paired with Hobbywing ESCs for commuter builds."
+  },
+  {
+    "id": "battery-hurricane-12s4p-p42a",
+    "brand": "Meepo",
+    "name": "Hurricane 12S4P P42A",
+    "category": "battery",
+    "cells": "12S4P",
     "voltageClass": "12S",
-    "continuousDischargeA": 90,
-    "configuration": "12S3P 21700",
-    "cellFormat": "21700",
-    "smartBms": true,
-    "notes": "High-voltage pack for strong acceleration and braking headroom.",
-    "tags": ["speed", "performance"]
+    "capacityWh": 725,
+    "notes": "High-discharge 21700 pack using Molicel P42A cells for powerful setups."
   },
   {
-    "id": "battery-8s-320",
-    "name": "8S 320Wh Urban Pack",
+    "id": "battery-backfire-zealot-s-12s2p",
+    "brand": "Backfire",
+    "name": "Zealot S 12S2P",
     "category": "battery",
-    "capacityWh": 320,
-    "voltageClass": "8S",
-    "continuousDischargeA": 50,
-    "configuration": "8S2P 18650",
-    "cellFormat": "18650",
-    "smartBms": false,
-    "notes": "Lightweight pack for compact travel boards.",
-    "tags": ["commuter", "budget", "travel"]
-  },
-  {
-    "id": "battery-10s-450",
-    "name": "10S 450Wh Trail Pack",
-    "category": "battery",
-    "capacityWh": 450,
-    "voltageClass": "10S",
-    "continuousDischargeA": 70,
-    "configuration": "10S3P 18650",
-    "cellFormat": "18650",
-    "smartBms": false,
-    "notes": "Ruggedized enclosure for mixed-surface commuting.",
-    "tags": ["off-road", "adventure"]
+    "cells": "12S2P",
+    "voltageClass": "12S",
+    "capacityWh": 346,
+    "notes": "Lightweight 21700 pack balanced for range and punch on street wheels."
   }
 ]
